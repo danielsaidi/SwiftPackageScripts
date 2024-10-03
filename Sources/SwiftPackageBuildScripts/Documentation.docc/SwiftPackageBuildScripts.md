@@ -1,4 +1,4 @@
-# SwiftPackageBuildScripts
+# ``SwiftPackageBuildScripts``
 
 This repository contains Swift Package Build Scripts that let you easily build and test your package, and generate new versions for it with a flexible `version_create` script.
 
@@ -50,13 +50,3 @@ If the file sets up `chmod +x` for itself, you then only have to type this:
 ```
 
 This makes building, testing and releasing your Swift Package a whoe lot easier, and removes the need of depending on Fastlane and Ruby.
-
-
-## Sample Package
-
-This repository has a sample package that is used to test that everything works as expected.
-
-You can find the generated, GitHub Actions hosted documentation [here][Documentation].
-
-
-[Documentation]: https://danielsaidi.github.io/EmojiKit/
