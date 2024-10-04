@@ -23,6 +23,6 @@ let package = Package(
         .testTarget(
             name: "SwiftPackageScriptsTests",
             dependencies: ["SwiftPackageScripts"]
-        ),
+        )
     ]
 )
