@@ -3,21 +3,21 @@
 
 ## 0.1
 
-This is the first beta version of this library, with the following scripts.
+This is the first beta version of this library.
 
 ### 🧾 Scripts
 
-* `scripts/build.sh` - Build a TARGET for all supported platforms
-* `scripts/build_platform.sh` - Build a TARGET for a certain PLATFORM
-* `scripts/docc.sh` - Build DocC documentation and prepare it for GitHub Pages
-* `scripts/test.sh` - Test a TARGET for all supported platforms
-* `scripts/test_platform.sh` - Test a TARGET for a certain PLATFORM
-* `scripts/validate_git.sh` - Validate that git is ready for release for a certain BRANCH
-* `scripts/validate_project.sh` - Validate that the project is ready for release
-* `scripts/version.sh` - Get the latest semver version
-* `scripts/version_bump.sh` - Bump and commit a new version number
-* `scripts/version_create.sh` - Create a new version for a certain TARGET and BRANCH
+* `scripts/build.sh` - Run builds for all supported platforms.
+* `scripts/build_platform.sh` - Run builds for a certain platform.
+* `scripts/docc.sh` - Build DocC documentation for GitHub Pages.
+* `scripts/test.sh` - Run tests for all supported platforms.
+* `scripts/test_platform.sh` - Run tests for a certain platform.
+* `scripts/version_number.sh` - Get the current git version number.
+* `scripts/version_number_bump.sh` - Bump and commit a new version number.
+* `scripts/version_create.sh` - Create a new version.
+* `scripts/version_validate_git.sh` - Validate that the repo is ready for release.
+* `scripts/version_validate_project.sh` - Validate that the project is ready for release.
 
 The `scripts/version_create.sh` script creates a new version with all required validation, build, and test steps.
 
-You can create a project-specific version script in your project root, that calls `version_create` with your project-specific target and branch. Have a look at the `version_create.sh` file in the repository root for an example.
+There is also a root `version_create.sh` that calls the generic script for this package.

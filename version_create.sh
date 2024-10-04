@@ -1,4 +1,4 @@
 SCRIPT="scripts/version_create.sh"
 chmod +x $SCRIPT
 chmod +x version_create.sh
-bash $SCRIPT SwiftPackageBuildScripts main
+bash $SCRIPT SwiftPackageScripts main

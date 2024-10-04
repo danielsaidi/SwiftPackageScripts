@@ -1,17 +1,8 @@
-<p align="center">
-    <img src ="Resources/Logo_Rounded.png" alt="SwiftPackageScripts Logo" title="SwiftPackageScripts" />
-</p>
+# ``SwiftPackageScripts``
 
-<p align="center">
-    <img src="https://img.shields.io/github/v/release/danielsaidi/SwiftPackageScripts?color=%2300550&sort=semver" alt="Version" title="Version" />
-    <img src="https://img.shields.io/badge/swift-6.0-orange.svg" alt="Swift 5.9" title="Swift 6.0" />
-    <img src="https://img.shields.io/github/license/danielsaidi/SwiftPackageScripts" alt="MIT License" title="MIT License" />
-    <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
-    <a href="https://mastodon.social/@danielsaidi"><img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" /></a>
-</p>
+## Overview
 
-
-# About SwiftPackageScripts
+![SwiftPackageScripts logotype](Logo.png)
 
 This repository contains Swift Package scripts that let you easily build and test your Swift Package, and generate new versions for it with a flexible `version_create` script.
 
@@ -77,11 +68,3 @@ Have a look at the `version_create.sh` file in the repository root for an exampl
 ## Sample Package
 
 This repository has a sample package that is used to test that everything works as expected.
-
-
-## Documentation
-
-You can find the generated, GitHub Actions hosted documentation [here][Documentation].
-
-
-[Documentation]: https://danielsaidi.github.io/SwiftPackageScripts/

@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftPackageBuildScripts",
+    name: "SwiftPackageScripts",
     platforms: [
         .iOS(.v14),
         .macOS(.v11),
@@ -13,16 +13,16 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "SwiftPackageBuildScripts",
-            targets: ["SwiftPackageBuildScripts"]
+            name: "SwiftPackageScripts",
+            targets: ["SwiftPackageScripts"]
         ),
     ],
     targets: [
         .target(
-            name: "SwiftPackageBuildScripts"),
+            name: "SwiftPackageScripts"),
         .testTarget(
-            name: "SwiftPackageBuildScriptsTests",
-            dependencies: ["SwiftPackageBuildScripts"]
+            name: "SwiftPackageScriptsTests",
+            dependencies: ["SwiftPackageScripts"]
         ),
     ]
 )
