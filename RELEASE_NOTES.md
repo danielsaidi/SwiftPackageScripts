@@ -1,6 +1,11 @@
 # RELEASE NOTES
 
 
+## 0.1.1
+
+This patch updates the `version_create` root script to allow passing in a custom branch.
+
+
 ## 0.1
 
 This is the first beta version of this library.
