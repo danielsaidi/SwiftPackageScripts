@@ -50,7 +50,7 @@ build_platform() {
     echo "Successfully built $TARGET for $PLATFORM"
 }
 
-# Loop through platforms and build
+# Loop through all platforms and call the build function
 echo "Building $TARGET for [$@]..."
 echo ""
 for PLATFORM in "$@"; do

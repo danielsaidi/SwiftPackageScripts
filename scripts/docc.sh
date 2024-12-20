@@ -84,7 +84,7 @@ build_platform() {
     echo "Successfully built $TARGET docs for $PLATFORM"
 }
 
-# Loop through platforms and build
+# Loop through all platforms and call the build function
 echo "Building $TARGET docs for [$@]..."
 echo ""
 for PLATFORM in "$@"; do
@@ -95,3 +95,4 @@ done
 
 # Complete successfully
 echo "Building $TARGET docs completed successfully!"
+echo ""
