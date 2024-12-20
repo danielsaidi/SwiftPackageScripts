@@ -1,6 +1,16 @@
 # RELEASE NOTES
 
 
+## 0.2
+
+This version optimizes the scripts and reduces the number of sub-scripts.
+
+* `script/build.sh` now takes a list of platforms to build.
+* `script/build.sh` now runs `xcodebuild` instead of calling `build_platform.sh`.
+* `script/build_platform.sh` is no longer needed and has been removed.
+
+
+
 ## 0.1.1
 
 This patch updates the `version_create` root script to allow passing in a custom branch.

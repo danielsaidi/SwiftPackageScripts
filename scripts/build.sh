@@ -3,45 +3,51 @@
 # Documentation:
 # This script builds a <TARGET> for all supported platforms.
 
+# Usage:
+# build <TARGET> [iOS macOS tvOS watchOS xrOS]
+# e.g. `build MyTarget iOS tvOS`
+
 # Exit immediately if a command exits with a non-zero status
 set -e
 
 # Verify that all required arguments are provided
 if [ $# -eq 0 ]; then
-    echo "Error: This script requires exactly one argument"
-    echo "Usage: $0 <TARGET>"
+    echo "Error: This script requires at least one argument"
+    echo "Usage: $0 <TARGET> [platform1 platform2 ...]"
+    echo "For instance: $0 MyTarget iOS macOS tvOS watchOS xrOS"
     exit 1
 fi
 
-# Create local argument variables.
+# Define argument variables
 TARGET=$1
 
-# Use the script folder to refer to other scripts.
-FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-SCRIPT="$FOLDER/build_platform.sh"
+# Remove TARGET from arguments list
+shift
 
-# Make the script executable
-chmod +x $SCRIPT
+# Read platform arguments or use default value
+if [ $# -eq 0 ]; then
+    set -- iOS macOS tvOS watchOS xrOS
+fi
 
-# A function that builds a specific platform
+# A function that builds $TARGET for a specific platform
 build_platform() {
-    local platform=$1
-    echo "Building for $platform..."
-    if ! bash $SCRIPT $TARGET $platform; then
-        echo "Failed to build $platform"
+    local PLATFORM=$1
+    echo "Building $TARGET for $PLATFORM..."
+    if ! xcodebuild -scheme $TARGET -derivedDataPath .build -destination generic/platform=$PLATFORM; then
+        echo "Failed to build $TARGET for $PLATFORM"
         return 1
     fi
-    echo "Successfully built $platform"
+    echo "Successfully built $TARGET for $PLATFORM"
 }
 
-# Array of platforms to build
-platforms=("iOS" "macOS" "tvOS" "watchOS" "xrOS")
-
 # Loop through platforms and build
-for platform in "${platforms[@]}"; do
-    if ! build_platform "$platform"; then
+echo "Building $TARGET for [$@]..."
+echo ""
+for PLATFORM in "$@"; do
+    if ! build_platform "$PLATFORM"; then
         exit 1
     fi
 done
 
-echo "All platforms built successfully!"
+# Complete successfully
+echo "Build completed successfully!"
