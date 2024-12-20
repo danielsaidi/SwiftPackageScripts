@@ -1,4 +1,4 @@
-# This workflow builds publish DocC docs to GitHub Pages.
+# This workflow builds and publishes DocC docs to GitHub Pages.
 # Source: https://maxxfrazer.medium.com/deploying-docc-with-github-actions-218c5ca6cad5
 # Sample: https://github.com/AgoraIO-Community/VideoUIKit-iOS/blob/main/.github/workflows/deploy_docs.yml
 
