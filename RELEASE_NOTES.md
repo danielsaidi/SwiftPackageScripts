@@ -9,6 +9,7 @@ This version optimizes the scripts and reduces the number of sub-scripts.
 * `script/build.sh` now runs `xcodebuild` instead of calling a script.
 * `script/build_platform.sh` is no longer needed and has been removed.
 * `script/docc.sh` now supports providing a list of platforms to build.
+* `script/framework.sh` is a new script that builds an XCFramework for all provided platforms.
 * `script/test.sh` now supports providing a list of platforms to test.
 * `script/test.sh` now runs `xcodebuild` instead of calling a script.
 * `script/test_platform.sh` is no longer needed and has been removed.

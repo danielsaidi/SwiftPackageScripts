@@ -5,7 +5,7 @@
 
 # Usage:
 # version_bump.sh
-# e.g. `scripts/version_bump.sh`
+# e.g. `bash scripts/version_bump.sh`
 
 # Exit immediately if a command exits with a non-zero status
 set -e

@@ -17,6 +17,7 @@ The repository contains the following utility scripts:
 
 * `scripts/build.sh` - Run builds for all provided platforms.
 * `scripts/docc.sh` - Build DocC documentation for all provided platforms.
+* `scripts/framework.sh` - Build an XCFramework for all provided platforms.
 * `scripts/test.sh` - Run the project unit tests for all provided platforms.
 * `scripts/version.sh` - Create a new version with validation and test steps.
 * `scripts/version_bump.sh` - Bump the version number and push a new version tag.

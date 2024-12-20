@@ -5,7 +5,7 @@
 
 # Usage:
 # build.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
-# e.g. `scripts/build.sh MyTarget iOS macOS`
+# e.g. `bash scripts/build.sh MyTarget iOS macOS`
 
 # Exit immediately if a command exits with a non-zero status
 set -e

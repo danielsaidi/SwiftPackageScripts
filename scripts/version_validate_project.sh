@@ -5,7 +5,7 @@
 
 # Usage:
 # version_validate_project.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
-# e.g. `scripts/version_validate_project.sh iOS macOS`
+# e.g. `bash scripts/version_validate_project.sh iOS macOS`
 
 # This script will:
 # * Validate that swiftlint passes.
@@ -16,7 +16,7 @@ set -e
 
 # Verify that all requires at least one argument"
 if [ $# -eq 0 ]; then
-    echo "Error: This script requires exactly one argument"
+    echo "Error: This script requires at least one argument"
     echo "Usage: $0 <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
     exit 1
 fi

@@ -5,7 +5,7 @@
 
 # Usage:
 # test.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
-# e.g. `scripts/test.sh MyTarget iOS macOS`
+# e.g. `bash scripts/test.sh MyTarget iOS macOS`
 
 # Exit immediately if a command exits with a non-zero status
 set -e
@@ -29,6 +29,11 @@ if [ $# -eq 0 ]; then
     set -- iOS macOS tvOS watchOS xrOS
 fi
 PLATFORMS=$@
+
+# Start script
+echo ""
+echo "Testing $TARGET for [$PLATFORMS]..."
+echo ""
 
 # A function that tests $TARGET for a specific platform
 test_platform() {
@@ -66,10 +71,6 @@ test_platform() {
     # Complete successfully
     echo "Successfully tested $TARGET for $PLATFORM"
 }
-
-# Start script
-echo "Testing $TARGET for [$PLATFORMS]..."
-echo ""
 
 # Loop through all platforms and call the test function
 for PLATFORM in $PLATFORMS; do

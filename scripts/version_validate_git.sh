@@ -5,7 +5,7 @@
 
 # Usage:
 # version_validate_git.sh <BRANCH default:main>"
-# e.g. `scripts/version_validate_git.sh master`
+# e.g. `bash scripts/version_validate_git.sh master`
 
 # This script will:
 # * Validate that the script is run within a git repository.

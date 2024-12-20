@@ -5,7 +5,7 @@
 
 # Usage:
 # version_number.sh
-# e.g. `scripts/version_number.sh`
+# e.g. `bash scripts/version_number.sh`
 
 # Exit immediately if a command exits with a non-zero status
 set -e

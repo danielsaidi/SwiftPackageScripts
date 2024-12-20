@@ -13,11 +13,7 @@
 
 # About Swift Package Scripts
 
-This repository contains scripts that let you easily build and test your Swift Package, and generate new versions for it.
-
-These scripts replaces Fastlane for the most common tasks, to let you manage your entire CI/CD process without having to rely on Fastlane and Ruby. 
-
-The repository also contains a `docc` script generates DocC documentation and prepare it for GitHub Pages. You can call it from your `.github/workflow` workflows to automatically publish documentation on each push.
+This repository contains scripts that let you easily build and test your Swift Package, generate DocC documentation and XCFrameworks, and create new versions.
 
 
 ## Scripts
@@ -26,6 +22,7 @@ The repository contains the following utility scripts:
 
 * `scripts/build.sh` - Run builds for all provided platforms.
 * `scripts/docc.sh` - Build DocC documentation for all provided platforms.
+* `scripts/framework.sh` - Build an XCFramework for all provided platforms.
 * `scripts/test.sh` - Run the project unit tests for all provided platforms.
 * `scripts/version.sh` - Create a new version with validation and test steps.
 * `scripts/version_bump.sh` - Bump the version number and push a new version tag.
@@ -52,23 +49,50 @@ bash $SCRIPT $TARGET $BRANCH $PLATFORMS
 You can have a look the root `version.sh` for reference, and create similar files for your own project.
 
 
-## How to run these scripts
+## GitHub integrations
 
-You can run the various build script like this:
+The `.github/workflows` folder contains `build` and `docc` runner files, that are used by GitHub Actions to tests and update the GitHub hosted documentation on every push to the main branch.
+
+
+## How to use these scripts
+
+Note that `chmod +x` is required to use `./`, otherwise you have to use `bash ...`.
+
+### Build and test
+
+You can build and test a package or project with the `build` and `test` scripts:
 
 ```bash
-./scripts/build.sh TARGET [PLATFORMS default: iOS macOS tvOS watchOS xrOS]
-./scripts/docc.sh TARGET [PLATFORMS]
+./scripts/build.sh TARGET [PLATFORMS]
 ./scripts/test.sh TARGET [PLATFORMS]
 ```
 
-To create a new version of your package, just run this from the project root:
+### Generate DocC
+
+You can generate DocC documentation for a package or project with the `docc` script:
 
 ```bash
-./scripts/version_create.sh TARGET MAIN_BRANCH [PLATFORMS default: iOS macOS tvOS watchOS xrOS]
+./scripts/build.sh TARGET [PLATFORMS default: iOS macOS tvOS watchOS xrOS]
+./scripts/test.sh TARGET [PLATFORMS]
 ```
 
-Note that `chmod +x` is required to use `./`, otherwise you have to use `bash ...`.
+### Generate XCFramework
+
+You can generate an XCFramework for a project (not package) with the `framework` script:
+
+```bash
+./scripts/framework.sh TARGET [PLATFORMS default: iOS macOS tvOS watchOS xrOS]
+```
+
+### Create new versions
+
+You can create a new version of your package or project with the `version` script:
+
+```bash
+./scripts/version.sh TARGET MAIN_BRANCH [PLATFORMS default: iOS macOS tvOS watchOS xrOS]
+```
+
+There are more version scripts that you can run standalone as well.
 
 
 ## Sample Package

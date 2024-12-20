@@ -6,7 +6,7 @@
 
 # Usage:
 # docc.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
-# e.g. `scripts/docc.sh MyTarget iOS macOS`
+# e.g. `bash scripts/docc.sh MyTarget iOS macOS`
 
 # Exit immediately if a command exits with a non-zero status
 set -e
