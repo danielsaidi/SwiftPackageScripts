@@ -1,11 +1,15 @@
 #!/bin/bash
 
 # Documentation:
-# This script builds a <TARGET> for all supported platforms.
+# This script builds a <TARGET> for all provided <PLATFORMS>.
+# If no <PLATFORMS> are defined, all supported platforms are used.
+
+# Supported Platforms:
+# iOS macOS tvOS watchOS xrOS
 
 # Usage:
-# build <TARGET> [iOS macOS tvOS watchOS xrOS]
-# e.g. `build MyTarget iOS tvOS`
+# build <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
+# e.g. `build MyTarget iOS macOS tvOS watchOS xrOS`
 
 # Exit immediately if a command exits with a non-zero status
 set -e
@@ -13,8 +17,8 @@ set -e
 # Verify that all required arguments are provided
 if [ $# -eq 0 ]; then
     echo "Error: This script requires at least one argument"
-    echo "Usage: $0 <TARGET> [platform1 platform2 ...]"
-    echo "For instance: $0 MyTarget iOS macOS tvOS watchOS xrOS"
+    echo "Usage: $0 <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
+    echo "For instance: $0 MyTarget macOS"
     exit 1
 fi
 
@@ -31,12 +35,18 @@ fi
 
 # A function that builds $TARGET for a specific platform
 build_platform() {
+
+    # Define a local $PLATFORM variable
     local PLATFORM=$1
+
+    # Build $TARGET for the $PLATFORM
     echo "Building $TARGET for $PLATFORM..."
     if ! xcodebuild -scheme $TARGET -derivedDataPath .build -destination generic/platform=$PLATFORM; then
         echo "Failed to build $TARGET for $PLATFORM"
         return 1
     fi
+
+    # Complete successfully
     echo "Successfully built $TARGET for $PLATFORM"
 }
 
@@ -50,4 +60,5 @@ for PLATFORM in "$@"; do
 done
 
 # Complete successfully
-echo "Build completed successfully!"
+echo "Building $TARGET completed successfully!"
+echo ""

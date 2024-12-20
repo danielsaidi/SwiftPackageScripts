@@ -15,8 +15,7 @@ The repository also contains a `docc` script generates DocC documentation and pr
 
 The repository contains the following utility scripts:
 
-* `scripts/build.sh` - Run builds for all supported platforms.
-* `scripts/build_platform.sh` - Run builds for a certain platform.
+* `scripts/build.sh` - Run builds for all provided platforms.
 * `scripts/docc.sh` - Build DocC documentation for GitHub Pages.
 * `scripts/test.sh` - Run tests for all supported platforms.
 * `scripts/test_platform.sh` - Run tests for a certain platform.
