@@ -15,7 +15,7 @@ let package = Package(
         .library(
             name: "SwiftPackageScripts",
             targets: ["SwiftPackageScripts"]
-        ),
+        )
     ],
     targets: [
         .target(

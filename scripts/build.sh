@@ -4,7 +4,7 @@
 # This script builds a <TARGET> for all provided <PLATFORMS>.
 
 # Usage:
-# scripts/build.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
+# build.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
 # e.g. `scripts/build.sh MyTarget iOS macOS`
 
 # Exit immediately if a command exits with a non-zero status

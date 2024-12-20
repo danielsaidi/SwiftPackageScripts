@@ -6,15 +6,16 @@
 This version optimizes the scripts and reduces the number of sub-scripts.
 
 * `script/build.sh` now supports providing a list of platforms to build.
-* `script/build.sh` now runs `xcodebuild` instead of calling `build_platform.sh`.
+* `script/build.sh` now runs `xcodebuild` instead of calling a script.
 * `script/build_platform.sh` is no longer needed and has been removed.
 * `script/docc.sh` now supports providing a list of platforms to build.
 * `script/test.sh` now supports providing a list of platforms to test.
-* `script/test.sh` now runs `xcodebuild` instead of calling `test_platform.sh`.
+* `script/test.sh` now runs `xcodebuild` instead of calling a script.
 * `script/test_platform.sh` is no longer needed and has been removed.
 * `script/version_create.sh` has been renamed to `script/version.sh`.
 * `script/version.sh` now supports providing a list of platforms to validate.
 * `script/version_number_bump.sh` has been renamed to `script/version_bump.sh`.
+* `script/version_validate_project.sh` now properly aborts when SwiftLint fails.
 
 
 ## 0.1.1

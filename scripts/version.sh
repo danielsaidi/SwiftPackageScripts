@@ -1,16 +1,15 @@
 #!/bin/bash
 
 # Documentation:
-# This script creates a new version for the provided <TARGET> and git <BRANCH>.
+# This script creates a new version for the provided <TARGET>, git <BRANCH> and <PLATFORMS>.
 
 # Usage:
-# scripts/version.sh <TARGET> <BRANCH default:main> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
+# version.sh <TARGET> <BRANCH default:main> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
 # e.g. `scripts/version.sh MyTarget master iOS macOS`
 
 # This script will:
-# * Validate the current git branch and its commit status.
-# * Validate that the project builds for all <PLATFORMS>.
-# * Validate that all unit tests pass for all <PLATFORMS>.
+# * Call version_validate_git.sh to validate the git repo.
+# * Call version_validate_project to run tests, swiftlint, etc.
 # * Call version_bump.sh if all validation steps above passed.
 
 # Exit immediately if a command exits with a non-zero status
@@ -37,10 +36,8 @@ if [ $# -eq 0 ]; then
     set -- iOS macOS tvOS watchOS xrOS
 fi
 
-# Use the script folder to refer to the platform script.
+# Use the script folder to refer to other scripts.
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-
-# Define all other scripts to use.
 SCRIPT_VALIDATE_GIT="$FOLDER/version_validate_git.sh"
 SCRIPT_VALIDATE_PROJECT="$FOLDER/version_validate_project.sh"
 SCRIPT_VERSION_BUMP="$FOLDER/version_bump.sh"

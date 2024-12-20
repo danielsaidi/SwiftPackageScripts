@@ -4,7 +4,7 @@
 # This script tests a <TARGET> for all provided <PLATFORMS>.
 
 # Usage:
-# scripts/test.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
+# test.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
 # e.g. `scripts/test.sh MyTarget iOS macOS`
 
 # Exit immediately if a command exits with a non-zero status

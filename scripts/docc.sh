@@ -5,7 +5,7 @@
 # The documentation ends up in to .build/docs-<PLATFORM>.
 
 # Usage:
-# scripts/docc.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
+# docc.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
 # e.g. `scripts/docc.sh MyTarget iOS macOS`
 
 # Exit immediately if a command exits with a non-zero status

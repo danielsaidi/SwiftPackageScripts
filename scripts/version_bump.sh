@@ -4,7 +4,7 @@
 # This script bumps the project version number.
 
 # Usage:
-# scripts/version_bump.sh
+# version_bump.sh
 # e.g. `scripts/version_bump.sh`
 
 # Exit immediately if a command exits with a non-zero status
@@ -12,8 +12,6 @@ set -e
 
 # Use the script folder to refer to other scripts.
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-
-# Define all other scripts to use.
 SCRIPT_VERSION_NUMBER="$FOLDER/version_number.sh"
 
 # Start script
