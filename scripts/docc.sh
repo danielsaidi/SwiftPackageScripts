@@ -71,7 +71,7 @@ build_platform() {
     # Transform docs for static hosting
     $(xcrun --find docc) process-archive \
       transform-for-static-hosting .build/docbuild/Build/Products/$DEBUG_PATH/$TARGET.doccarchive \
-      --output-path .build/docs-$DEBUG_PATH \
+      --output-path .build/docs-$PLATFORM \
       --hosting-base-path "$TARGET";
 
     # Inject a root redirect script on the root page
