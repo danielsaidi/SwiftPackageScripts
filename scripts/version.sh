@@ -1,21 +1,17 @@
 #!/bin/bash
 
 # Documentation:
-# This script creates a new version for the provided <TARGET> and git <BRANCH>, 
-# provided that it validates for all provided <PLATFORMS>.
-
-# If no <BRANCH> is provided, "main" will be used.
-# If no <PLATFORMS> are provided, all supported platforms are used.
+# This script creates a new version for the provided <TARGET> and git <BRANCH>.
 
 # Usage:
-# version <TARGET> <BRANCH> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
-# e.g. `version MyTarget master iOS macOS`
+# scripts/version.sh <TARGET> <BRANCH default:main> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
+# e.g. `scripts/version.sh MyTarget master iOS macOS`
 
-# The script will:
+# This script will:
 # * Validate the current git branch and its commit status.
 # * Validate that the project builds for all <PLATFORMS>.
 # * Validate that all unit tests pass for all <PLATFORMS>.
-# * Call the version_bump.sh script to bump the version number if everything is OK.
+# * Call version_bump.sh if all validation steps above passed.
 
 # Exit immediately if a command exits with a non-zero status
 set -e
@@ -23,8 +19,8 @@ set -e
 # Verify that all required arguments are provided
 if [ $# -lt 2 ]; then
     echo "Error: This script requires at least two arguments"
-    echo "Usage: $0 <TARGET> <BRANCH>"
-    echo "For instance: $0 MyTarget macOS"
+    echo "Usage: $0 <TARGET> <BRANCH> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
+    echo "For instance: $0 MyTarget master iOS macOS"
     exit 1
 fi
 
@@ -43,9 +39,11 @@ fi
 
 # Use the script folder to refer to the platform script.
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-VALIDATE_GIT="$FOLDER/version_validate_git.sh"
-VALIDATE_PROJECT="$FOLDER/version_validate_project.sh"
-VERSION_BUMP="$FOLDER/version_number_bump.sh"
+
+# Define all other scripts to use.
+SCRIPT_VALIDATE_GIT="$FOLDER/version_validate_git.sh"
+SCRIPT_VALIDATE_PROJECT="$FOLDER/version_validate_project.sh"
+SCRIPT_VERSION_BUMP="$FOLDER/version_bump.sh"
 
 # A function that run a certain script and checks for errors
 run_script() {
@@ -71,12 +69,12 @@ echo ""
 
 # Validate git and project
 echo "Validating..."
-run_script "$VALIDATE_GIT" "$BRANCH"
-run_script "$VALIDATE_PROJECT" "$TARGET"
+run_script "$SCRIPT_VALIDATE_GIT" "$BRANCH"
+run_script "$SCRIPT_VALIDATE_PROJECT" "$TARGET"
 
 # Bump version
 echo "Bumping version..."
-run_script "$VERSION_BUMP"
+run_script "$SCRIPT_VERSION_BUMP"
 
 # Complete successfully
 echo ""

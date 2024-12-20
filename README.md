@@ -26,10 +26,10 @@ The repository contains the following utility scripts:
 
 * `scripts/build.sh` - Run builds for all provided platforms.
 * `scripts/docc.sh` - Build DocC documentation for all provided platforms.
-* `scripts/test.sh` - Run tests for all provided platforms.
-* `scripts/version.sh` - Create a new version.
+* `scripts/test.sh` - Run the project's unit tests for all provided platforms.
+* `scripts/version.sh` - Create a new version with validation and test steps.
+* `scripts/version_bump.sh` - Bump the version number and push a new version tag.
 * `scripts/version_number.sh` - Get the current git version number.
-* `scripts/version_number_bump.sh` - Bump and commit a new version number.
 * `scripts/version_validate_git.sh` - Validate that the repo is ready for release.
 * `scripts/version_validate_project.sh` - Validate that the project is ready for release.
 

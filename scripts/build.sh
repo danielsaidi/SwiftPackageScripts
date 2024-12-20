@@ -3,14 +3,9 @@
 # Documentation:
 # This script builds a <TARGET> for all provided <PLATFORMS>.
 
-# If no <PLATFORMS> are provided, all supported platforms are used.
-
-# Supported Platforms:
-# iOS macOS tvOS watchOS xrOS
-
 # Usage:
-# build <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
-# e.g. `build MyTarget iOS macOS tvOS watchOS xrOS`
+# scripts/build.sh <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]
+# e.g. `scripts/build.sh MyTarget iOS macOS`
 
 # Exit immediately if a command exits with a non-zero status
 set -e
@@ -19,7 +14,7 @@ set -e
 if [ $# -eq 0 ]; then
     echo "Error: This script requires at least one argument"
     echo "Usage: $0 <TARGET> [<PLATFORMS> default:iOS macOS tvOS watchOS xrOS]"
-    echo "For instance: $0 MyTarget macOS"
+    echo "For instance: $0 MyTarget iOS macOS"
     exit 1
 fi
 

@@ -14,6 +14,7 @@ This version optimizes the scripts and reduces the number of sub-scripts.
 * `script/test_platform.sh` is no longer needed and has been removed.
 * `script/version_create.sh` has been renamed to `script/version.sh`.
 * `script/version.sh` now supports providing a list of platforms to validate.
+* `script/version_number_bump.sh` has been renamed to `script/version_bump.sh`.
 
 
 ## 0.1.1
