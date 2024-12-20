@@ -2,8 +2,9 @@
 
 # Documentation:
 # This script builds DocC for a <TARGET> for all provided <PLATFORMS>.
-# If no <PLATFORMS> are defined, all supported platforms are used.
 # The documentation ends up in to .build/docs-<PLATFORM>.
+
+# If no <PLATFORMS> are provided, all supported platforms are used.
 
 # Supported Platforms:
 # iOS macOS tvOS watchOS xrOS
@@ -30,10 +31,11 @@ TARGET_LOWERCASED=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 # Remove TARGET from arguments list
 shift
 
-# Read platform arguments or use default value
+# Define platforms variable
 if [ $# -eq 0 ]; then
     set -- iOS macOS tvOS watchOS xrOS
 fi
+PLATFORMS=$@
 
 # Prepare the package for DocC
 swift package resolve;
@@ -84,15 +86,19 @@ build_platform() {
     echo "Successfully built $TARGET docs for $PLATFORM"
 }
 
-# Loop through all platforms and call the build function
-echo "Building $TARGET docs for [$@]..."
+# Start script
 echo ""
-for PLATFORM in "$@"; do
+echo "Building $TARGET docs for [$PLATFORMS]..."
+echo ""
+
+# Loop through all platforms and call the build function
+for PLATFORM in $PLATFORMS; do
     if ! build_platform "$PLATFORM"; then
         exit 1
     fi
 done
 
 # Complete successfully
+echo ""
 echo "Building $TARGET docs completed successfully!"
 echo ""

@@ -2,7 +2,8 @@
 
 # Documentation:
 # This script tests a <TARGET> for all provided <PLATFORMS>.
-# If no <PLATFORMS> are defined, all supported platforms are used.
+
+# If no <PLATFORMS> are provided, all supported platforms are used.
 
 # Supported Platforms:
 # iOS macOS tvOS watchOS xrOS
@@ -28,10 +29,11 @@ TARGET=$1
 # Remove TARGET from arguments list
 shift
 
-# Read platform arguments or use default value
+# Define platforms variable
 if [ $# -eq 0 ]; then
     set -- iOS macOS tvOS watchOS xrOS
 fi
+PLATFORMS=$@
 
 # A function that tests $TARGET for a specific platform
 test_platform() {
@@ -70,15 +72,18 @@ test_platform() {
     echo "Successfully tested $TARGET for $PLATFORM"
 }
 
-# Loop through all platforms and call the test function
-echo "Testing $TARGET for [$@]..."
+# Start script
+echo "Testing $TARGET for [$PLATFORMS]..."
 echo ""
-for PLATFORM in "$@"; do
+
+# Loop through all platforms and call the test function
+for PLATFORM in $PLATFORMS; do
     if ! test_platform "$PLATFORM"; then
         exit 1
     fi
 done
 
 # Complete successfully
+echo ""
 echo "Testing $TARGET completed successfully!"
 echo ""

@@ -2,7 +2,8 @@
 
 # Documentation:
 # This script builds a <TARGET> for all provided <PLATFORMS>.
-# If no <PLATFORMS> are defined, all supported platforms are used.
+
+# If no <PLATFORMS> are provided, all supported platforms are used.
 
 # Supported Platforms:
 # iOS macOS tvOS watchOS xrOS
@@ -28,10 +29,11 @@ TARGET=$1
 # Remove TARGET from arguments list
 shift
 
-# Read platform arguments or use default value
+# Define platforms variable
 if [ $# -eq 0 ]; then
     set -- iOS macOS tvOS watchOS xrOS
 fi
+PLATFORMS=$@
 
 # A function that builds $TARGET for a specific platform
 build_platform() {
@@ -50,15 +52,19 @@ build_platform() {
     echo "Successfully built $TARGET for $PLATFORM"
 }
 
-# Loop through all platforms and call the build function
-echo "Building $TARGET for [$@]..."
+# Start script
 echo ""
-for PLATFORM in "$@"; do
+echo "Building $TARGET for [$PLATFORMS]..."
+echo ""
+
+# Loop through all platforms and call the build function
+for PLATFORM in $PLATFORMS; do
     if ! build_platform "$PLATFORM"; then
         exit 1
     fi
 done
 
 # Complete successfully
+echo ""
 echo "Building $TARGET completed successfully!"
 echo ""

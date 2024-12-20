@@ -16,12 +16,11 @@ The repository also contains a `docc` script generates DocC documentation and pr
 The repository contains the following utility scripts:
 
 * `scripts/build.sh` - Run builds for all provided platforms.
-* `scripts/docc.sh` - Build DocC documentation for GitHub Pages.
-* `scripts/test.sh` - Run tests for all supported platforms.
-* `scripts/test_platform.sh` - Run tests for a certain platform.
+* `scripts/docc.sh` - Build DocC documentation for all provided platforms.
+* `scripts/test.sh` - Run tests for all provided platforms.
+* `scripts/version.sh` - Create a new version.
 * `scripts/version_number.sh` - Get the current git version number.
 * `scripts/version_number_bump.sh` - Bump and commit a new version number.
-* `scripts/version_create.sh` - Create a new version.
 * `scripts/version_validate_git.sh` - Validate that the repo is ready for release.
 * `scripts/version_validate_project.sh` - Validate that the project is ready for release.
 

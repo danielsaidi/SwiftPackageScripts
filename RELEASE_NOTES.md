@@ -5,13 +5,15 @@
 
 This version optimizes the scripts and reduces the number of sub-scripts.
 
-* `script/build.sh` now takes a list of platforms to build.
+* `script/build.sh` now supports providing a list of platforms to build.
 * `script/build.sh` now runs `xcodebuild` instead of calling `build_platform.sh`.
 * `script/build_platform.sh` is no longer needed and has been removed.
-* `script/docc.sh` now takes a list of platforms to build documentation for.
-* `script/test.sh` now takes a list of platforms to test.
+* `script/docc.sh` now supports providing a list of platforms to build.
+* `script/test.sh` now supports providing a list of platforms to test.
 * `script/test.sh` now runs `xcodebuild` instead of calling `test_platform.sh`.
 * `script/test_platform.sh` is no longer needed and has been removed.
+* `script/version_create.sh` has been renamed to `script/version.sh`.
+* `script/version.sh` now supports providing a list of platforms to validate.
 
 
 ## 0.1.1
