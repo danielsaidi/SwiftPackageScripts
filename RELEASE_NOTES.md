@@ -1,6 +1,11 @@
 # RELEASE NOTES
 
 
+## 0.2.1
+
+This patch fixes a redirect injection bug in the DocC script.
+
+
 ## 0.2
 
 This version optimizes the scripts and reduces the number of sub-scripts.

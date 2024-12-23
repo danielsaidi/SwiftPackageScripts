@@ -75,7 +75,7 @@ build_platform() {
       --hosting-base-path "$TARGET";
 
     # Inject a root redirect script on the root page
-    echo "<script>window.location.href += \"/documentation/$TARGET_LOWERCASED\"</script>" > .build/docs-$DEBUG_PATH/index.html;
+    echo "<script>window.location.href += \"/documentation/$TARGET_LOWERCASED\"</script>" > .build/docs-$PLATFORM/index.html;
 
     # Complete successfully
     echo "Successfully built $TARGET docs for $PLATFORM"
