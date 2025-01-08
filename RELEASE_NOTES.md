@@ -1,6 +1,11 @@
 # RELEASE NOTES
 
 
+## 0.3.1
+
+This version adds a `--no-semver` argument to the `version_bump` script.
+
+
 ## 0.3
 
 This version adds three new scripts:
