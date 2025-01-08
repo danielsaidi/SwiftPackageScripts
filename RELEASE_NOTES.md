@@ -1,6 +1,15 @@
 # RELEASE NOTES
 
 
+## 0.3
+
+This version adds three new scripts:
+
+* `scripts/chmod.sh` makes all scripts in the script folder executable.
+* `scripts/git_default_branch.sh` resolves the default git branch name.
+* `scripts/package_name.sh` resolves the name of the main Swift package.
+
+
 ## 0.2.1
 
 This patch fixes a redirect injection bug in the DocC script.

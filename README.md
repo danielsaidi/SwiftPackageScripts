@@ -18,17 +18,20 @@ This repository contains scripts that let you easily build and test your Swift P
 
 ## Scripts
 
-The repository contains the following utility scripts:
+The `scripts` filder contains the following scripts:
 
-* `scripts/build.sh` - Run builds for all provided platforms.
-* `scripts/docc.sh` - Build DocC documentation for all provided platforms.
-* `scripts/framework.sh` - Build an XCFramework for all provided platforms.
-* `scripts/test.sh` - Run the project unit tests for all provided platforms.
-* `scripts/version.sh` - Create a new version with validation and test steps.
-* `scripts/version_bump.sh` - Bump the version number and push a new version tag.
-* `scripts/version_number.sh` - Get the current git version number.
-* `scripts/version_validate_git.sh` - Validate that the repo is ready for release.
-* `scripts/version_validate_project.sh` - Validate that the project is ready for release.
+* `build.sh` - Run builds for all provided platforms.
+* `chmod.sh` - Runs `chmod +x` on all scripts in the script folder.
+* `docc.sh` - Build DocC documentation for all provided platforms.
+* `framework.sh` - Build an XCFramework for all provided platforms.
+* `git_default_branch.sh` - Get the default git branch name.
+* `package_name.sh` - Get the name of the main Swift package.
+* `test.sh` - Run the project unit tests for all provided platforms.
+* `version.sh` - Create a new version with validation and test steps.
+* `version_bump.sh` - Bump the version number and push a new version tag.
+* `version_number.sh` - Get the current git version number.
+* `version_validate_git.sh` - Validate that the repo is ready for release.
+* `version_validate_project.sh` - Validate that the project is ready for release.
 
 Note that you may have to run `chmod +x <SCRIPT>` to be able to run a script.
 
@@ -38,6 +41,8 @@ Note that you may have to run `chmod +x <SCRIPT>` to be able to run a script.
 You can create project-specific scripts that call these scripts in pre-configured ways, for instance:
 
 ```bash
+# package_version.sh
+
 TARGET="SwiftPackageScripts"
 PLATFORMS="iOS macOS tvOS watchOS xrOS"
 BRANCH=${1:-"main"}
