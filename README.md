@@ -25,33 +25,66 @@ The `scripts` filder contains the following scripts:
 * `docc.sh` - Build DocC documentation for all provided platforms.
 * `framework.sh` - Build an XCFramework for all provided platforms.
 * `git_default_branch.sh` - Get the default git branch name.
+* `package_docc.sh` - Build DocC documentation for the main Swift package.
+* `package_framework.sh` - Build an XCFramework for the main Swift package.
 * `package_name.sh` - Get the name of the main Swift package.
+* `package_version.sh` - Create a new version for the main Swift package.
 * `test.sh` - Run the project unit tests for all provided platforms.
 * `version.sh` - Create a new version with validation and test steps.
 * `version_bump.sh` - Bump the version number and push a new version tag.
 * `version_number.sh` - Get the current git version number.
-* `version_validate_git.sh` - Validate that the repo is ready for release.
-* `version_validate_project.sh` - Validate that the project is ready for release.
+* `version_validate_git.sh` - Validate that a git repo is ready for release.
+* `version_validate_target.sh` - Validate that a target is ready for release.
 
-Note that you may have to run `chmod +x <SCRIPT>` to be able to run a script.
+Note that you may have to run `scripts chmod +x <SCRIPT>` to be able to run a script.
 
 
-## Project-pecific scripts
+## Package-Specific Scripts
 
-You can create project-specific scripts that call these scripts in pre-configured ways, for instance:
+While these scripts cover many use-cases, you may still want to create project-specific scripts.
 
-```bash
-# package_version.sh
+For instance, a closed-source package that only targets iOS could set up a release script that always generates DocC, an XCFramework and a new version tag for the package:
 
-TARGET="SwiftPackageScripts"
-PLATFORMS="iOS macOS tvOS watchOS xrOS"
-BRANCH=${1:-"main"}
-SCRIPT="scripts/version.sh"
-chmod +x $SCRIPT
-bash $SCRIPT $TARGET $BRANCH $PLATFORMS
+```swift
+#!/bin/bash
+
+# Documentation:
+# This package-specific script builds a new release of the package.
+# This script builds DocC, a framework, then creates a version tag.
+# You can pass in a custom BRANCH to make the non-main branch pass validation.
+
+# Usage:
+# package_release.sh <BRANCH default:main>
+# e.g. `bash scripts/package_release.sh master`
+
+# Exit immediately if a command exits with non-zero status
+set -e
+
+# Get branch name
+BRANCH_NAME_SCRIPT="scripts/git_default_branch.sh"
+DEFAULT_BRANCH=$("$BRANCH_NAME_SCRIPT") || { echo "Failed to get branch name"; exit 1; }
+BRANCH_NAME=${1:-$DEFAULT_BRANCH}
+
+# Define platforms
+PLATFORMS="iOS"
+
+# Get package name
+PACKAGE_NAME=$("scripts/package_name.sh") || { echo "Failed to get package name"; exit 1; }
+
+# Build all package deliverables
+bash "scripts/package_docc.sh" $PLATFORMS || { echo "DocC script failed"; exit 1; }
+bash "scripts/package_framework.sh" $PLATFORMS || { echo "Framework script failed"; exit 1; }
+bash "scripts/package_version.sh" $BRANCH_NAME || { echo "Version script failed"; exit 1; }
+
+# Manual step - print checksum
+echo ""
+echo "***** CHECKSUM *****"
+swift package compute-checksum .build/$PACKAGE_NAME.zip
+echo "********************"
+echo ""
 ```
 
-You can have a look the root `version.sh` for reference, and create similar files for your own project.
+This script mixed hard-coding certain always true factors, while allowing us to pass in a custom branch if needed.
 
 
 ## GitHub integrations

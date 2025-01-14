@@ -1,6 +1,18 @@
 # RELEASE NOTES
 
 
+## 0.4
+
+This version adds three new scripts:
+
+* `scripts/package_docc.sh` builds DocC for a Swift package.
+* `scripts/package_framework.sh` builds an XCFramework for a Swift package.
+* `scripts/package_version.sh` generates a git version tag for a Swift package.
+
+This version also renames `version_validate_project` to `version_validate_target`.
+
+
+
 ## 0.3.1
 
 This version adds a `--no-semver` argument to the `version_bump` script.
