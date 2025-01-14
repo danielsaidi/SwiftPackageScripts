@@ -9,7 +9,9 @@ This version adds three new scripts:
 * `scripts/package_framework.sh` builds an XCFramework for a Swift package.
 * `scripts/package_version.sh` generates a git version tag for a Swift package.
 
-This version also renames `version_validate_project` to `version_validate_target`.
+This version also adds a `sync_to.sh` script that syncs `scripts` to another folder.
+
+This version also renames `version_validate_project.sh` to `version_validate_target.sh`.
 
 
 

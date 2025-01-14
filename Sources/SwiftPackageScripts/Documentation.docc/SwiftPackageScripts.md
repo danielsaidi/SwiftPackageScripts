@@ -4,16 +4,10 @@
 
 ![SwiftPackageScripts logotype](Logo.png)
 
-This repository contains Swift Package scripts that let you easily build and test your Swift Package, and generate new versions for it with a flexible `version_create` script.
-
-These scripts replaces Fastlane for the most common tasks, to let you manage your entire CI/CD process without having to rely on Fastlane and Ruby. 
-
-The repository also contains a `docc` script generates DocC documentation and prepare it for GitHub Pages. You can call it from your `.github/workflow` workflows to automatically publish documentation on each push.
+Swift Package Scripts let you easily build and test your Swift Package, generate DocC documentation and XCFrameworks, and create new versions.
 
 
 ## Scripts
-
-The repository contains the following utility scripts:
 
 The `scripts` filder contains the following scripts:
 
@@ -33,11 +27,29 @@ The `scripts` filder contains the following scripts:
 * `version_validate_git.sh` - Validate that a git repo is ready for release.
 * `version_validate_target.sh` - Validate that a target is ready for release.
 
-Note that you may have to run `scripts chmod +x <SCRIPT>` to be able to run a script.
+Note that you may have to run `chmod +x <SCRIPT>` to be able to run a script.
 
 
 
-## Package-Specific Scripts
+## Sync scripts to another folder
+
+The `sync_to.sh` script can be used to sync the entire `scripts` folder to another folder:
+
+```shell
+./sync_to.sh ../MyOtherProject
+```
+
+This will remove any already existing folder, and replace it with the latest version.
+
+
+
+## GitHub integrations
+
+The `.github/workflows` folder contains `build` and `docc` runner files, that are used by GitHub Actions to tests and update the GitHub hosted documentation on every push to the main branch.
+
+
+
+## Project-specific scripts
 
 While these scripts cover many use-cases, you may still want to create project-specific scripts.
 
@@ -86,38 +98,12 @@ This script mixed hard-coding certain always true factors, while allowing us to 
 
 
 
-## How to call scripts from the project root
+## Package-specific scripts
 
-You can call any script like this, with its supported arguments:
+The `package_` prefixed scripts will by default grab the target name from the main `Package.swift` file.
 
-```bash
-bash scripts/build [ProjectName]
-```
+You can still pass in custom branches and platforms to these scripts, if you want to customize them.
 
-
-## How to create new package versions
-
-To create a new version of your package, just run this from the project root:
-
-```bash
-bash scripts/version_create.sh [ProjectName] [MainBranch]
-```
-
-To avoid having to type the project name and main branch, you can create a project-specific version script in your project root, that calls `version_create` with your project-specific target and branch.
-
-You can then just do this:
-
-```bash
-bash version_create.sh
-```
-
-If the file sets up `chmod +x` for itself, you then only have to type this:
-
-```bash
-./version_create.sh
-```
-
-Have a look at the `version_create.sh` file in the repository root for an example.
 
 
 ## Sample Package

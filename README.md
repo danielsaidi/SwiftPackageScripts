@@ -13,7 +13,7 @@
 
 # About Swift Package Scripts
 
-This repository contains scripts that let you easily build and test your Swift Package, generate DocC documentation and XCFrameworks, and create new versions.
+Swift Package Scripts let you easily build and test your Swift Package, generate DocC documentation and XCFrameworks, and create new versions.
 
 
 ## Scripts
@@ -36,101 +36,40 @@ The `scripts` filder contains the following scripts:
 * `version_validate_git.sh` - Validate that a git repo is ready for release.
 * `version_validate_target.sh` - Validate that a target is ready for release.
 
-Note that you may have to run `scripts chmod +x <SCRIPT>` to be able to run a script.
+Note that you may have to run `chmod +x <SCRIPT>` to be able to run a script.
 
 
-## Package-Specific Scripts
 
-While these scripts cover many use-cases, you may still want to create project-specific scripts.
+## Installation
 
-For instance, a closed-source package that only targets iOS could set up a release script that always generates DocC, an XCFramework and a new version tag for the package:
+Swift Package Scripts can be installed to your computer by cloning the repository:
 
-```swift
-#!/bin/bash
-
-# Documentation:
-# This package-specific script builds a new release of the package.
-# This script builds DocC, a framework, then creates a version tag.
-# You can pass in a custom BRANCH to make the non-main branch pass validation.
-
-# Usage:
-# package_release.sh <BRANCH default:main>
-# e.g. `bash scripts/package_release.sh master`
-
-# Exit immediately if a command exits with non-zero status
-set -e
-
-# Get branch name
-BRANCH_NAME_SCRIPT="scripts/git_default_branch.sh"
-DEFAULT_BRANCH=$("$BRANCH_NAME_SCRIPT") || { echo "Failed to get branch name"; exit 1; }
-BRANCH_NAME=${1:-$DEFAULT_BRANCH}
-
-# Define platforms
-PLATFORMS="iOS"
-
-# Get package name
-PACKAGE_NAME=$("scripts/package_name.sh") || { echo "Failed to get package name"; exit 1; }
-
-# Build all package deliverables
-bash "scripts/package_docc.sh" $PLATFORMS || { echo "DocC script failed"; exit 1; }
-bash "scripts/package_framework.sh" $PLATFORMS || { echo "Framework script failed"; exit 1; }
-bash "scripts/package_version.sh" $BRANCH_NAME || { echo "Version script failed"; exit 1; }
-
-# Manual step - print checksum
-echo ""
-echo "***** CHECKSUM *****"
-swift package compute-checksum .build/$PACKAGE_NAME.zip
-echo "********************"
-echo ""
+```
+git clone https://github.com/danielsaidi/SwiftPackageScripts.git
 ```
 
-This script mixed hard-coding certain always true factors, while allowing us to pass in a custom branch if needed.
+You can then navigate to the folder and sync the scripts to any older folder on your machine. 
+
+
+
+## Sync scripts to another folder
+
+The `sync_to.sh` script can be used to sync the entire `scripts` folder to another folder:
+
+```shell
+./sync_to.sh ../MyOtherProject
+```
+
+This will remove any already existing folder, and replace it with the latest version.
+
 
 
 ## GitHub integrations
 
-The `.github/workflows` folder contains `build` and `docc` runner files, that are used by GitHub Actions to tests and update the GitHub hosted documentation on every push to the main branch.
+The `.github/workflows` folder contains `build` and `docc` runner files that are used to run tests and build DocC documentation with GitHub Actions on every push to the main branch.
 
+These GitHub scripts are not part of the sync. You can manually copy them to your own project to integrate these scripts with GitHub Actions.
 
-## How to use these scripts
-
-Note that `chmod +x` is required to use `./`, otherwise you have to use `bash ...`.
-
-### Build and test
-
-You can build and test a package or project with the `build` and `test` scripts:
-
-```bash
-./scripts/build.sh TARGET [PLATFORMS]
-./scripts/test.sh TARGET [PLATFORMS]
-```
-
-### Generate DocC
-
-You can generate DocC documentation for a package or project with the `docc` script:
-
-```bash
-./scripts/build.sh TARGET [PLATFORMS default: iOS macOS tvOS watchOS xrOS]
-./scripts/test.sh TARGET [PLATFORMS]
-```
-
-### Generate XCFramework
-
-You can generate an XCFramework for a project (not package) with the `framework` script:
-
-```bash
-./scripts/framework.sh TARGET [PLATFORMS default: iOS macOS tvOS watchOS xrOS]
-```
-
-### Create new versions
-
-You can create a new version of your package or project with the `version` script:
-
-```bash
-./scripts/version.sh TARGET MAIN_BRANCH [PLATFORMS default: iOS macOS tvOS watchOS xrOS]
-```
-
-There are more version scripts that you can run standalone as well.
 
 
 ## Sample Package
@@ -138,9 +77,45 @@ There are more version scripts that you can run standalone as well.
 This repository has a sample package that is used to test that everything works as expected.
 
 
+
 ## Documentation
 
-You can find the generated, GitHub hosted documentation [here][Documentation].
+For more information about these scripts, and how to set up project-specific scripts, see the online [here][Documentation].
 
+
+
+## Support my work 
+
+You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
+
+Your support makes it possible for me to put more work into these projects and make them the best they can be.
+
+
+
+## Contact
+
+Feel free to reach out if you have questions or if you want to contribute in any way:
+
+* Website: [danielsaidi.com][Website]
+* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
+* Twitter: [@danielsaidi][Twitter]
+* E-mail: [daniel.saidi@gmail.com][Email]
+
+
+
+## License
+
+SystemNotification is available under the MIT license. See the [LICENSE][License] file for more info.
+
+
+
+[Email]: mailto:daniel.saidi@gmail.com
+[Website]: https://www.danielsaidi.com
+[GitHub]: https://www.github.com/danielsaidi
+[Twitter]: https://www.twitter.com/danielsaidi
+[Mastodon]: https://mastodon.social/@danielsaidi
+[Sponsors]: https://github.com/sponsors/danielsaidi
+[OpenSource]: https://www.danielsaidi.com/opensource
 
 [Documentation]: https://danielsaidi.github.io/SwiftPackageScripts/
+[License]: https://github.com/danielsaidi/SystemNotification/blob/master/LICENSE
