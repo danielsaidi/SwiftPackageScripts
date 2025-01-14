@@ -1,6 +1,14 @@
 # RELEASE NOTES
 
 
+## 0.4.1
+
+This version also adds a `sync_from.sh` script that can be run from any project.
+
+The script will replace the script folder with one from a Swift Package Scripts folder.
+
+
+
 ## 0.4
 
 This version adds three new scripts:

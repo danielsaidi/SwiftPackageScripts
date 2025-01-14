@@ -20,6 +20,7 @@ The `scripts` filder contains the following scripts:
 * `package_framework.sh` - Build an XCFramework for the main Swift package.
 * `package_name.sh` - Get the name of the main Swift package.
 * `package_version.sh` - Create a new version for the main Swift package.
+* `sync_from.sh` - Sync the scripts folder from a Swift Package Scripts folder.
 * `test.sh` - Run the project unit tests for all provided platforms.
 * `version.sh` - Create a new version with validation and test steps.
 * `version_bump.sh` - Bump the version number and push a new version tag.
@@ -31,7 +32,7 @@ Note that you may have to run `chmod +x <SCRIPT>` to be able to run a script.
 
 
 
-## Sync scripts to another folder
+## Sync scripts
 
 The `sync_to.sh` script can be used to sync the entire `scripts` folder to another folder:
 
@@ -40,6 +41,14 @@ The `sync_to.sh` script can be used to sync the entire `scripts` folder to anoth
 ```
 
 This will remove any already existing folder, and replace it with the latest version.
+
+You can also run `scripts/sync_from.sh` from another folder, to update its scripts folder:
+
+```shell
+./scripst/sync_from.sh ../SwiftPackageScripts
+```
+
+This means that you can easily keep your projects in sync with your local copy of this project. 
 
 
 
