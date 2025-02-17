@@ -1,6 +1,12 @@
 # RELEASE NOTES
 
 
+## 0.4.2
+
+This version improves `version_validate_git` to avoid false positives.
+
+
+
 ## 0.4.1
 
 This version also adds a `sync_from.sh` script that can be run from any project.
