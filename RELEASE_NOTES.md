@@ -1,6 +1,12 @@
 # RELEASE NOTES
 
 
+## 0.4.3
+
+This version makes `version_validate` scripts properly abort on error.
+
+
+
 ## 0.4.2
 
 This version improves `version_validate_git` to avoid false positives.
