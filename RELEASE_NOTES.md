@@ -5,6 +5,8 @@
 
 This version makes `version_validate` scripts properly abort on error.
 
+This version makes `test` automatically resolve any matching simulator.
+
 
 
 ## 0.4.2
