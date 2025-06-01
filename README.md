@@ -6,7 +6,8 @@
     <img src="https://img.shields.io/github/v/release/danielsaidi/SwiftPackageScripts?color=%2300550&sort=semver" alt="Version" title="Version" />
     <img src="https://img.shields.io/badge/swift-6.0-orange.svg" alt="Swift 6.0" title="Swift 6.0" />
     <a href="https://danielsaidi.github.io/SwiftPackageScripts"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
-    <img src="https://img.shields.io/github/license/danielsaidi/SwiftPackageScripts" alt="MIT License" title="MIT License" />
+    <a href="https://github.com/danielsaidi/SwiftPackageScripts/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/SwiftPackageScripts" alt="MIT License" /></a>
+    <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
 </p>
 
 
@@ -48,7 +49,13 @@ Swift Package Scripts can be installed to your computer by cloning the repositor
 git clone https://github.com/danielsaidi/SwiftPackageScripts.git
 ```
 
-You can then navigate to the folder and sync the scripts to any older folder on your machine. 
+You can then navigate to the folder and sync the scripts to any older folder on your machine.
+
+
+
+## Support My Work
+
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
 
@@ -89,14 +96,6 @@ This repository has a sample package that is used to test that everything works 
 ## Documentation
 
 For more information about these scripts, and how to set up project-specific scripts, see the online [here][Documentation].
-
-
-
-## Support my work 
-
-You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
-
-Your support makes it possible for me to put more work into these projects and make them the best they can be.
 
 
 

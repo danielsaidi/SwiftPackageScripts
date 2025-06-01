@@ -32,6 +32,24 @@ Note that you may have to run `chmod +x <SCRIPT>` to be able to run a script.
 
 
 
+## Installation
+
+Swift Package Scripts can be installed to your computer by cloning the repository:
+
+```
+git clone https://github.com/danielsaidi/SwiftPackageScripts.git
+```
+
+You can then navigate to the folder and sync the scripts to any older folder on your machine.
+
+
+
+## Support My Work
+
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
+
+
+
 ## Sync scripts
 
 The `sync_to.sh` script can be used to sync the entire `scripts` folder to another folder:
@@ -118,3 +136,11 @@ You can still pass in custom branches and platforms to these scripts, if you wan
 ## Sample Package
 
 This repository has a sample package that is used to test that everything works as expected.
+
+
+
+[Email]: mailto:daniel.saidi@gmail.com
+[Website]: https://danielsaidi.com
+[GitHub]: https://github.com/danielsaidi
+[OpenSource]: https://danielsaidi.com/opensource
+[Sponsors]: https://github.com/sponsors/danielsaidi
