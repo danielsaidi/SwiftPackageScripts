@@ -13,32 +13,38 @@
 
 # Swift Package Scripts
 
-Swift Package Scripts let you easily build and test your Swift Package, generate DocC documentation and XCFrameworks, and create new versions.
+Swift Package Scripts has Terminal scripts that can build and test your Swift Package, build DocC documentation and deploy it to GitHub Pages, generate XCFramework zip files, and create new semantic versions.
 
 
 ## Scripts
 
-The `scripts` filder contains the following scripts:
+The `scripts` folder contains the following scripts:
 
-* `build.sh` - Run builds for all provided platforms.
+* `build.sh` - Build a target for all or some platforms.
 * `chmod.sh` - Runs `chmod +x` on all scripts in the script folder.
-* `docc.sh` - Build DocC documentation for all provided platforms.
-* `framework.sh` - Build an XCFramework for all provided platforms.
+* `docc.sh` - Build DocC documentation for all or some platforms.
+* `framework.sh` - Build an XCFramework for all or some platforms.
 * `git_default_branch.sh` - Get the default git branch name.
-* `package_docc.sh` - Build DocC documentation for the main Swift package.
-* `package_framework.sh` - Build an XCFramework for the main Swift package.
 * `package_name.sh` - Get the name of the main Swift package.
-* `package_version.sh` - Create a new version for the main Swift package.
-* `sync_from.sh` - Sync the scripts folder from a Swift Package Scripts folder.
-* `test.sh` - Run the project unit tests for all provided platforms.
-* `version.sh` - Create a new version with validation and test steps.
-* `version_bump.sh` - Bump the version number and push a new version tag.
-* `version_number.sh` - Get the current git version number.
-* `version_validate_git.sh` - Validate that a git repo is ready for release.
-* `version_validate_target.sh` - Validate that a target is ready for release.
+* `release.sh` - Make a release build with several validation steps.
+* `release_validate.sh` - Validate the current branch for release.
+* `sync_from.sh` - Sync `scripts` from a Swift Package Scripts folder.
+* `test.sh` - Test a target on all or some platforms.
+* `version_bump.sh` - Bump the current version number and create a new tag.
+* `version_number.sh` - Get the current version number from the latest tag.
 
-Note that you may have to run `chmod +x <SCRIPT>` to be able to run a script.
+Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time. You can use `chmod.sh` to do this for all `scripts`.
 
+
+## GitHub Actions
+
+The `.github` folder contains the following GitHub Actions workflows:
+
+* `build.yml` - Build the package for all or some platforms.
+* `docc.yml` - Build DocC documentation and deploy it to GitHub Pages.
+* `test.yml` - Test the package on all or some platforms.
+
+These workflows use `main` as git branch. Change this in each file to trigger the workflows for other branches. As the files are not part of the sync, you have to copy them manually.
 
 
 ## Installation
@@ -49,8 +55,13 @@ Swift Package Scripts can be installed to your computer by cloning the repositor
 git clone https://github.com/danielsaidi/SwiftPackageScripts.git
 ```
 
-You can then navigate to the folder and sync the scripts to any older folder on your machine.
+You can then navigate to the folder and sync the scripts to any older folder, using the `scripts/sync_to.sh` script.
 
+```shell
+./sync_to.sh ../AnotherProjectFolder
+```
+
+This will remove any already existing folder, and replace it with the latest version. After the first sync, you can use `scripts/sync_from.sh` in the project folder to sync from another folder.
 
 
 ## Support My Work
@@ -58,45 +69,14 @@ You can then navigate to the folder and sync the scripts to any older folder on 
 You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
-
-## Sync scripts
-
-The `sync_to.sh` script can be used to sync the entire `scripts` folder to another folder:
-
-```shell
-./sync_to.sh ../MyOtherProject
-```
-
-This will remove any already existing folder, and replace it with the latest version.
-
-You can also run `scripts/sync_from.sh` from another folder, to update its scripts folder:
-
-```shell
-./scripst/sync_from.sh ../SwiftPackageScripts
-```
-
-This means that you can easily keep your projects in sync with your local copy of this project. 
-
-
-
-## GitHub integrations
-
-The `.github/workflows` folder contains `build` and `docc` runner files that are used to run tests and build DocC documentation with GitHub Actions on every push to the main branch.
-
-These GitHub scripts are not part of the sync. You can manually copy them to your own project to integrate these scripts with GitHub Actions.
-
-
-
 ## Sample Package
 
 This repository has a sample package that is used to test that everything works as expected.
 
 
-
 ## Documentation
 
 For more information about these scripts, and how to set up project-specific scripts, see the online [here][Documentation].
-
 
 
 ## Contact
@@ -109,11 +89,9 @@ Feel free to reach out if you have questions or if you want to contribute in any
 * E-mail: [daniel.saidi@gmail.com][Email]
 
 
-
 ## License
 
-SystemNotification is available under the MIT license. See the [LICENSE][License] file for more info.
-
+Swift Package Scripts is available under the MIT license. See the [LICENSE][License] file for more info.
 
 
 [Email]: mailto:daniel.saidi@gmail.com

@@ -1,6 +1,35 @@
 # RELEASE NOTES
 
 
+## 1.0
+
+This version updates all `.github` and `scripts` scripts.
+
+## ✨ Features
+
+* `scripts` are rewritten from scratch with better argument parsing and --help support.
+* `scripts` that need a target now use the package name as default target, if possible.
+
+## 💡 Changes
+
+* `.github` no longer pass in repository name as target, which makes them less brittle.
+
+## 💥 Breaking changes
+
+* `scripts` now use a different input argument format.
+* `scripts` no longer contains package-specific scripts.
+
+
+
+## 0.5
+
+This version updates all `.github` and `scripts` scripts.
+
+* `.github` scripts now use the latest versions of their dependencies.
+* `scripts/build.sh` now asks for missing TARGET and uses `--p` or `--platforms` for PLATFORMS input.
+
+
+
 ## 0.4.3
 
 This version makes `version_validate` scripts properly abort on error.

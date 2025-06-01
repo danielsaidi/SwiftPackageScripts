@@ -4,32 +4,38 @@
 
 ![SwiftPackageScripts logotype](Logo.png)
 
-Swift Package Scripts let you easily build and test your Swift Package, generate DocC documentation and XCFrameworks, and create new versions.
+Swift Package Scripts has Terminal scripts that can build and test your Swift Package, build DocC documentation and deploy it to GitHub Pages, generate XCFramework zip files, and create new semantic versions.
 
 
 ## Scripts
 
-The `scripts` filder contains the following scripts:
+The `scripts` folder contains the following scripts:
 
-* `build.sh` - Run builds for all provided platforms.
+* `build.sh` - Build a target for all or some platforms.
 * `chmod.sh` - Runs `chmod +x` on all scripts in the script folder.
-* `docc.sh` - Build DocC documentation for all provided platforms.
-* `framework.sh` - Build an XCFramework for all provided platforms.
+* `docc.sh` - Build DocC documentation for all or some platforms.
+* `framework.sh` - Build an XCFramework for all or some platforms.
 * `git_default_branch.sh` - Get the default git branch name.
-* `package_docc.sh` - Build DocC documentation for the main Swift package.
-* `package_framework.sh` - Build an XCFramework for the main Swift package.
 * `package_name.sh` - Get the name of the main Swift package.
-* `package_version.sh` - Create a new version for the main Swift package.
-* `sync_from.sh` - Sync the scripts folder from a Swift Package Scripts folder.
-* `test.sh` - Run the project unit tests for all provided platforms.
-* `version.sh` - Create a new version with validation and test steps.
-* `version_bump.sh` - Bump the version number and push a new version tag.
-* `version_number.sh` - Get the current git version number.
-* `version_validate_git.sh` - Validate that a git repo is ready for release.
-* `version_validate_target.sh` - Validate that a target is ready for release.
+* `release.sh` - Make a release build with several validation steps.
+* `release_validate.sh` - Validate the current branch for release.
+* `sync_from.sh` - Sync `scripts` from a Swift Package Scripts folder.
+* `test.sh` - Test a target on all or some platforms.
+* `version_bump.sh` - Bump the current version number and create a new tag.
+* `version_number.sh` - Get the current version number from the latest tag.
 
-Note that you may have to run `chmod +x <SCRIPT>` to be able to run a script.
+Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time. You can use `chmod.sh` to do this for all `scripts`.
 
+
+## GitHub Actions
+
+The `.github` folder contains the following GitHub Actions workflows:
+
+* `build.yml` - Build the package for all or some platforms.
+* `docc.yml` - Build DocC documentation and deploy it to GitHub Pages.
+* `test.yml` - Test the package on all or some platforms.
+
+These workflows use `main` as git branch. Change this in each file to trigger the workflows for other branches. As the files are not part of the sync, you have to copy them manually.
 
 
 ## Installation
@@ -40,8 +46,13 @@ Swift Package Scripts can be installed to your computer by cloning the repositor
 git clone https://github.com/danielsaidi/SwiftPackageScripts.git
 ```
 
-You can then navigate to the folder and sync the scripts to any older folder on your machine.
+You can then navigate to the folder and sync the scripts to any older folder, using the `scripts/sync_to.sh` script.
 
+```shell
+./sync_to.sh ../AnotherProjectFolder
+```
+
+This will remove any already existing folder, and replace it with the latest version. After the first sync, you can use `scripts/sync_from.sh` in the project folder to sync from another folder.
 
 
 ## Support My Work
@@ -49,98 +60,38 @@ You can then navigate to the folder and sync the scripts to any older folder on 
 You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
-
-## Sync scripts
-
-The `sync_to.sh` script can be used to sync the entire `scripts` folder to another folder:
-
-```shell
-./sync_to.sh ../MyOtherProject
-```
-
-This will remove any already existing folder, and replace it with the latest version.
-
-You can also run `scripts/sync_from.sh` from another folder, to update its scripts folder:
-
-```shell
-./scripst/sync_from.sh ../SwiftPackageScripts
-```
-
-This means that you can easily keep your projects in sync with your local copy of this project. 
-
-
-
-## GitHub integrations
-
-The `.github/workflows` folder contains `build` and `docc` runner files, that are used by GitHub Actions to tests and update the GitHub hosted documentation on every push to the main branch.
-
-
-
-## Project-specific scripts
-
-While these scripts cover many use-cases, you may still want to create project-specific scripts.
-
-For instance, a closed-source package that only targets iOS could set up a release script that always generates DocC, an XCFramework and a new version tag for the package:
-
-```swift
-#!/bin/bash
-
-# Documentation:
-# This package-specific script builds a new release of the package.
-# This script builds DocC, a framework, then creates a version tag.
-# You can pass in a custom BRANCH to make the non-main branch pass validation.
-
-# Usage:
-# package_release.sh <BRANCH default:main>
-# e.g. `bash scripts/package_release.sh master`
-
-# Exit immediately if a command exits with non-zero status
-set -e
-
-# Get branch name
-BRANCH_NAME_SCRIPT="scripts/git_default_branch.sh"
-DEFAULT_BRANCH=$("$BRANCH_NAME_SCRIPT") || { echo "Failed to get branch name"; exit 1; }
-BRANCH_NAME=${1:-$DEFAULT_BRANCH}
-
-# Define platforms
-PLATFORMS="iOS"
-
-# Get package name
-PACKAGE_NAME=$("scripts/package_name.sh") || { echo "Failed to get package name"; exit 1; }
-
-# Build all package deliverables
-bash "scripts/package_docc.sh" $PLATFORMS || { echo "DocC script failed"; exit 1; }
-bash "scripts/package_framework.sh" $PLATFORMS || { echo "Framework script failed"; exit 1; }
-bash "scripts/package_version.sh" $BRANCH_NAME || { echo "Version script failed"; exit 1; }
-
-# Manual step - print checksum
-echo ""
-echo "***** CHECKSUM *****"
-swift package compute-checksum .build/$PACKAGE_NAME.zip
-echo "********************"
-echo ""
-```
-
-This script mixed hard-coding certain always true factors, while allowing us to pass in a custom branch if needed.
-
-
-
-## Package-specific scripts
-
-The `package_` prefixed scripts will by default grab the target name from the main `Package.swift` file.
-
-You can still pass in custom branches and platforms to these scripts, if you want to customize them.
-
-
-
 ## Sample Package
 
 This repository has a sample package that is used to test that everything works as expected.
 
 
+## Documentation
+
+For more information about these scripts, and how to set up project-specific scripts, see the online [here][Documentation].
+
+
+## Contact
+
+Feel free to reach out if you have questions or if you want to contribute in any way:
+
+* Website: [danielsaidi.com][Website]
+* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
+* Twitter: [@danielsaidi][Twitter]
+* E-mail: [daniel.saidi@gmail.com][Email]
+
+
+## License
+
+Swift Package Scripts is available under the MIT license. See the [LICENSE][License] file for more info.
+
 
 [Email]: mailto:daniel.saidi@gmail.com
-[Website]: https://danielsaidi.com
-[GitHub]: https://github.com/danielsaidi
-[OpenSource]: https://danielsaidi.com/opensource
+[Website]: https://www.danielsaidi.com
+[GitHub]: https://www.github.com/danielsaidi
+[Twitter]: https://www.twitter.com/danielsaidi
+[Mastodon]: https://mastodon.social/@danielsaidi
 [Sponsors]: https://github.com/sponsors/danielsaidi
+[OpenSource]: https://www.danielsaidi.com/opensource
+
+[Documentation]: https://danielsaidi.github.io/SwiftPackageScripts/
+[License]: https://github.com/danielsaidi/SystemNotification/blob/master/LICENSE
