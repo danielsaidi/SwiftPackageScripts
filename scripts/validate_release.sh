@@ -6,7 +6,7 @@ set -e
 # Function to display usage information
 show_usage() {
     echo
-    echo "This script validates a <TARGET> for release."
+    echo "This script validates a <TARGET> for release by checking the git repo, then running lint and unit tests for all platforms."
 
     echo
     echo "Usage: $0 [TARGET] [-p|--platforms <PLATFORM1> <PLATFORM2> ...]"
@@ -113,7 +113,7 @@ fi
 
 # Use the script folder to refer to other scripts
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-SCRIPT_VALIDATE_GIT="$FOLDER/release_validate_git.sh"
+SCRIPT_VALIDATE_GIT="$FOLDER/validate_git_branch.sh"
 SCRIPT_TEST="$FOLDER/test.sh"
 
 # A function that runs a certain script and checks for errors

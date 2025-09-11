@@ -9,8 +9,9 @@ show_usage() {
     echo "This script validates the Git repository for release."
 
     echo
-    echo "Usage: $0 [BRANCH]"
+    echo "Usage: $0 [BRANCH] [-b|--branch <BRANCH>]"
     echo "  [BRANCH]              Optional. The branch to validate (auto-detects main/master if not specified)"
+    echo "  -b, --branch          Optional. The branch to validate"
     
     echo
     echo "This script will:"
@@ -23,6 +24,8 @@ show_usage() {
     echo "  $0"
     echo "  $0 master"
     echo "  $0 develop"
+    echo "  $0 -b main"
+    echo "  $0 --branch develop"
     echo
 }
 
@@ -50,6 +53,14 @@ BRANCH=""  # Will be set to default after parsing
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
+        -b|--branch)
+            shift  # Remove --branch from arguments
+            if [[ $# -eq 0 || "$1" =~ ^- ]]; then
+                show_usage_error_and_exit "--branch requires a branch name"
+            fi
+            BRANCH="$1"
+            shift
+            ;;
         -h|--help)
             show_usage; exit 0 ;;
         -*)

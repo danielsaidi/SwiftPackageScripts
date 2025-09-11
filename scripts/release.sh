@@ -16,7 +16,7 @@ show_usage() {
     
     echo
     echo "This script will:"
-    echo "  * Call release_validate.sh to run tests, swiftlint, git validation, etc."
+    echo "  * Call validate_release.sh to run tests, swiftlint, git validation, etc."
     echo "  * Call version_bump.sh if all validation steps above passed"
     
     echo
@@ -130,7 +130,7 @@ fi
 
 # Use the script folder to refer to other scripts
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-SCRIPT_VALIDATE="$FOLDER/release_validate.sh"
+SCRIPT_VALIDATE="$FOLDER/validate_release.sh"
 SCRIPT_VERSION_BUMP="$FOLDER/version_bump.sh"
 
 # A function that runs a certain script and checks for errors
