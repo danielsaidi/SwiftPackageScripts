@@ -1,6 +1,16 @@
 # RELEASE NOTES
 
 
+## 1.0.1
+
+This version updates `docc.sh` to support DocC hosted on a custom domain.
+
+## 💡 Changes
+
+* `docc.sh` now allows you to pass in a `--hosting-base-path`.
+
+
+
 ## 1.0
 
 This version updates all `.github` and `scripts` scripts.
