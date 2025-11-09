@@ -1,5 +1,24 @@
 # RELEASE NOTES
 
+[Swift Package Scripts](https://github.com/danielsaidi/SwiftPackageScripts) honors semantic versioning, with the following strategy:
+
+* Deprecations can happen at any time.
+* Deprecations are removed in `major` updates.
+* Breaking changes should only occur in `major` updates.
+* Breaking changes *can* occur in `minor` and `patch` updates, if the alternative is worse.
+
+Beta version tags and releases are removed after the next minor or major version. 
+
+
+## 1.1
+
+This version adds dSYM option to `framework.sh`.
+
+## 💡 Changes
+
+* `framework.sh` now allows you to pass in `--dSyms/-d 1` to enable dSYM build.
+
+
 
 ## 1.0.1
 
