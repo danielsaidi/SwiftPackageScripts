@@ -12,11 +12,11 @@ show_usage() {
     echo "Usage: $0 [TARGET] [-p|--platforms <PLATFORM1> <PLATFORM2> ...] [-d|--dSyms <0|1>]"
     echo "  [TARGET]              Optional. The target to build framework for (defaults to package name)"
     echo "  -p, --platforms       Optional. List of platforms (default: iOS macOS tvOS watchOS xrOS)"
-    echo "  -d, --dSyms           Optional. Include dSYMs (0 or 1, default: 0)"
-    
+    echo "  -d, --dsyms           Optional. Include dSYMs (0 or 1, default: 0)"
+
     echo
     echo "Important: This script doesn't work on packages, only on .xcproj projects that generate a framework."
-    
+
     echo
     echo "Examples:"
     echo "  $0"
@@ -24,7 +24,7 @@ show_usage() {
     echo "  $0 -p iOS macOS"
     echo "  $0 MyTarget -p iOS macOS"
     echo "  $0 MyTarget --platforms iOS macOS tvOS watchOS xrOS"
-    echo "  $0 MyTarget --dSyms 1"
+    echo "  $0 MyTarget --dsyms 1"
     echo "  $0 MyTarget -p iOS macOS -d 1"
     echo
 }
@@ -49,26 +49,26 @@ while [[ $# -gt 0 ]]; do
         -p|--platforms)
             shift  # Remove --platforms from arguments
             PLATFORMS=""  # Clear default platforms
-            
+
             # Collect all platform arguments until we hit another flag or run out of args
             while [[ $# -gt 0 && ! "$1" =~ ^- ]]; do
                 PLATFORMS="$PLATFORMS $1"
                 shift
             done
-            
+
             # Remove leading space and check if we got any platforms
             PLATFORMS=$(echo "$PLATFORMS" | sed 's/^ *//')
             if [ -z "$PLATFORMS" ]; then
                 show_error_and_exit "--platforms requires at least one platform"
             fi
             ;;
-        -d|--dSyms)
+        -d|--dsyms)
             shift
             if [[ "$1" == "0" || "$1" == "1" ]]; then
                 INCLUDE_DSYMS="$1"
                 shift
             else
-                show_error_and_exit "--dSyms requires 0 or 1"
+                show_error_and_exit "--dsyms requires 0 or 1"
             fi
             ;;
         -h|--help)
@@ -91,7 +91,7 @@ if [ -z "$TARGET" ]; then
     # Use the script folder to refer to other scripts
     FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
     SCRIPT_PACKAGE_NAME="$FOLDER/package_name.sh"
-    
+
     # Check if package_name.sh exists
     if [ -f "$SCRIPT_PACKAGE_NAME" ]; then
         echo "No target provided, attempting to get package name..."
@@ -225,7 +225,7 @@ fi
 
 # Generate XCFramework zip
 echo "Generating XCFramework zip..."
-if ! zip -r $BUILD_ZIP $BUILD_FILE; then
+if ! (cd $BUILD_FOLDER && zip -r $(basename $BUILD_ZIP) $(basename $BUILD_FILE)); then
     echo "Failed to generate XCFramework zip"
     exit 1
 fi
@@ -240,7 +240,7 @@ if [ "$INCLUDE_DSYMS" == "1" ]; then
     echo
     echo "Packaging dSYMs separately..."
     mkdir -p $DSYM_FOLDER
-    
+
     # Copy all dSYMs from archives with unique naming
     for archive in $BUILD_FOLDER_ARCHIVES/*.xcarchive; do
         if [ -d "$archive/dSYMs" ]; then
@@ -256,14 +256,14 @@ if [ "$INCLUDE_DSYMS" == "1" ]; then
             done
         fi
     done
-    
+
     # Create dSYMs zip
     if [ -d "$DSYM_FOLDER" ] && [ "$(ls -A $DSYM_FOLDER)" ]; then
         if ! (cd $BUILD_FOLDER && zip -r $(basename $DSYM_ZIP) $(basename $DSYM_FOLDER)); then
             echo "Failed to generate dSYMs zip"
             exit 1
         fi
-        
+
         echo
         echo "***** DSYMS CHECKSUM *****"
         swift package compute-checksum $DSYM_ZIP
