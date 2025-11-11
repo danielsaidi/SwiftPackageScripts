@@ -1,7 +1,9 @@
 # This workflow tests the project on all platforms.
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
 
-name: Unit Test Runner
+# For more information see: 
+# https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: Test Runner
 
 on:
   push:
@@ -11,13 +13,16 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-15 # macos-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
+
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest-stable
-      - name: Run tests for all platforms
+          xcode-version: 16.4 # latest-stable
+
+      - name: Tests All Platforms
         run: bash scripts/test.sh
