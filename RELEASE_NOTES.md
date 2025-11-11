@@ -10,7 +10,7 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
-## 1.2
+## 1.1
 
 This version adds a new `xcframework.yml` GitHub workflow template, and adds new script parameters.
 
@@ -22,16 +22,6 @@ This version adds a new `xcframework.yml` GitHub workflow template, and adds new
 
 * `framework.sh` now allows you to pass in `--dsyms/-d 1` to enable dSYM build.
 * `validate_release.sh` now allows you to pass in `--swiftlint 0` to disable swiftlint.
-
-
-
-## 1.1
-
-This version adds dSYM option to `framework.sh`.
-
-## 💡 Changes
-
-* `framework.sh` now allows you to pass in `--dSyms/-d 1` to enable dSYM build.
 
 
 
