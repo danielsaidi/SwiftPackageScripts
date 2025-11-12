@@ -235,7 +235,7 @@ if ! eval "$XCFRAMEWORK_CMD"; then
 fi
 
 # Generate XCFramework zip and checksum if requested
-if [ "$GENERATE_ZIP" == "1" ]; then
+if [ "$GENERATE_ZIPS" == "1" ]; then
     echo "Generating XCFramework zip..."
     if ! (cd $BUILD_FOLDER && zip -r $(basename $BUILD_ZIP) $(basename $BUILD_FILE)); then
         echo "Failed to generate XCFramework zip"
@@ -271,13 +271,13 @@ if [ "$INCLUDE_DSYMS" == "1" ]; then
     done
     
     # Create dSYMs zip only if zip generation is enabled
-    if [ "$GENERATE_ZIP" == "1" ] && [ -d "$DSYM_FOLDER" ] && [ "$(ls -A $DSYM_FOLDER)" ]; then
+    if [ "$GENERATE_ZIPS" == "1" ] && [ -d "$DSYM_FOLDER" ] && [ "$(ls -A $DSYM_FOLDER)" ]; then
         echo "Generating dSYMs zip..."
         if ! (cd $BUILD_FOLDER && zip -r $(basename $DSYM_ZIP) $(basename $DSYM_FOLDER)); then
             echo "Failed to generate dSYMs zip"
             exit 1
         fi
-    elif [ "$GENERATE_ZIP" == "0" ] && [ -d "$DSYM_FOLDER" ] && [ "$(ls -A $DSYM_FOLDER)" ]; then
+    elif [ "$GENERATE_ZIPS" == "0" ] && [ -d "$DSYM_FOLDER" ] && [ "$(ls -A $DSYM_FOLDER)" ]; then
         echo "dSYMs collected but not zipped (--zip not enabled)"
     else
         echo "Warning: No dSYMs found to package"
