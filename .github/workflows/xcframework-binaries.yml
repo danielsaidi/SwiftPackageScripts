@@ -1,15 +1,18 @@
-# This workflow builds binaries for a closed-source   tests the project on all platforms.
+# This workflow builds binaries for a closed-source package.
+# The output is an XCFramework zip file and a dSYMs zip file.
 
 # For this to work, you must define these repository secrets:
 # - BUILD_CERTIFICATE_BASE64
 # - P12_PASSWORD
 # - KEYCHAIN_PASSWORD
-# You must also change the FRAMEWORK_NAME below to use your framework's name.
+
+# OBS! You must also change FRAMEWORK_NAME below to use your
+# framework's name.
 
 # For more information see: 
 # https://danielsaidi.com/blog/2025/11/09/building-closed-source-binaries-with-github-actions
 
-name: XCFramework Binaries Builder
+name: Build XCFramework Binaries
 
 on:
   workflow_dispatch:  # Manual trigger
@@ -23,10 +26,10 @@ jobs:
     runs-on: macos-15 # macos-latest
 
     env:
-      FRAMEWORK_NAME: CHANGE_THIS_TO_YOUR_FRAMEWORK_NAME
+      FRAMEWORK_NAME: CHANGE_THIS_TO_YOUR_FRAMEWORK_NAME    # <-- OBS!
 
-    steps:
-      - name: Checkout Code
+        steps:
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install build certificate
@@ -61,30 +64,18 @@ jobs:
         run: ./scripts/validate_release.sh -p iOS --swiftlint 0
 
       - name: Run release script
-        run: ./scripts/framework.sh -p iOS --dsyms 1
+        run: ./scripts/framework.sh -p iOS --dsyms 1 --zip 0
 
-      - name: Upload XCFramework zip
+      - name: Upload XCFramework
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.FRAMEWORK_NAME }}
-          path: .build/${{ env.FRAMEWORK_NAME }}.zip
+          path: .build/${{ env.FRAMEWORK_NAME }}.xcframework
           if-no-files-found: error
 
-      - name: Upload dSYMs zip
+      - name: Upload dSYMs
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.FRAMEWORK_NAME }}-dSYMs
-          path: .build/${{ env.FRAMEWORK_NAME }}-dSYMs.zip
+          path: .build/dSYMs
           if-no-files-found: error
-
-      - name: Compute Checksum
-        run: |
-          CHECKSUM=$(swift package compute-checksum .build/${{ env.FRAMEWORK_NAME }}.zip)
-          echo "${{ env.FRAMEWORK_NAME }}.zip checksum: \`$CHECKSUM\`" >> $GITHUB_STEP_SUMMARY
-          echo "$CHECKSUM" > checksum.txt
-
-      - name: Upload checksum
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.FRAMEWORK_NAME }}-checksum
-          path: checksum.txt

@@ -10,6 +10,20 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
+## 1.1.1
+
+This version updates `xcframework-binaries.yml` to upload unzipped files.
+
+## ✨ Features
+
+* `framework.sh` has a new `--zip` parameter.
+
+## 💡 Changes
+
+* `xcframework-binaries.yml` calls `framework.sh` with `--zip 0`.
+
+
+
 ## 1.1
 
 This version adds a new `xcframework.yml` GitHub workflow template, and adds new script parameters.
