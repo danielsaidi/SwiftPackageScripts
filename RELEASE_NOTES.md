@@ -10,9 +10,15 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
+## 1.2.1
+
+This version makes `binary_artifacts.yml` name the container zip differently.
+
+
+
 ## 1.2
 
-This version adds a  updates `xcframework-binaries.yml` to upload unzipped files.
+This version adds a  updates `binary_artifacts.yml` to upload unzipped files.
 
 The binary artifact workflow has been adjusted to upload a container zip file, to avoid data loss.
 
