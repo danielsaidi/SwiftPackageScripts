@@ -4,17 +4,16 @@
 
 ![SwiftPackageScripts logotype](Logo.png)
 
-Swift Package Scripts has Terminal scripts that can build and test your Swift Package, build DocC documentation and deploy it to GitHub Pages, generate XCFramework zip files, and create new semantic versions.
+Swift Package Scripts has Terminal scripts that can be used to build and test your package, build DocC and deploy it to GitHub Pages, generate XCFramework binary artifacts, create new semantic versions, etc.
+
+Swift Package Scripts also has a collection of GitHub Actions workflows that let you perform some operations from the GitHub Actions dashboard.
 
 
-## Scripts
-
-The `scripts` folder contains the following scripts:
+The `scripts` folder contains Swift Package-related scripts, that can all be customized with their own parameters:
 
 * `build.sh` - Build a target for all or some platforms.
 * `chmod.sh` - Runs `chmod +x` on all scripts in the script folder.
 * `docc.sh` - Build DocC documentation for all or some platforms.
-* `framework.sh` - Build an XCFramework for all or some platforms.
 * `git_default_branch.sh` - Get the default git branch name.
 * `package_name.sh` - Get the name of the main Swift package.
 * `release.sh` - Make a release build with several validation steps.
@@ -24,6 +23,7 @@ The `scripts` folder contains the following scripts:
 * `validate_release.sh` - Validate the package for release.
 * `version_bump.sh` - Bump the current version number and create a new tag.
 * `version_number.sh` - Get the current version number from the latest tag.
+* `xcframework.sh` - Build an XCFramework for all or some platforms.
 
 Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time. You can use `chmod.sh` to do this for all `scripts`.
 
@@ -32,11 +32,13 @@ Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the
 
 The `.github` folder contains the following GitHub Actions workflows:
 
+* `binary_artifacts.yml` - Build an XCFramework and dSYMs for all or some platforms.
 * `build.yml` - Build the package for all or some platforms.
 * `docc.yml` - Build DocC documentation and deploy it to GitHub Pages.
 * `test.yml` - Test the package on all or some platforms.
+* `version_bump.yml` - Bump the current version number and create a new tag.
 
-These workflows use `main` as git branch. Change this in each file to trigger the workflows for other branches. As the files are not part of the sync, you have to copy them manually.
+Have a look at each file for workflow-specific information and if there is anything you need to do to make it work.
 
 
 ## Installation
