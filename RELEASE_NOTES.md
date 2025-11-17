@@ -10,6 +10,24 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
+## 1.2
+
+This version adds a  updates `xcframework-binaries.yml` to upload unzipped files.
+
+The binary artifact workflow has been adjusted to upload a container zip file, to avoid data loss.
+
+## ✨ Features
+
+* `version_bump.yml` is a new GitHub Actions workflow.
+* `version_bump.sh` has new `--type` and `--version` parameters.
+
+## 💡 Changes
+
+* `xcframework-binaries.yml` is reneamed to `binary_artifacts.yml`.
+* `xcframework-binaries.yml` now uploads a container zip file that needs additional handling.
+
+
+
 ## 1.1.1
 
 This version updates `xcframework-binaries.yml` to upload unzipped files.
