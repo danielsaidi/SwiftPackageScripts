@@ -4,10 +4,9 @@
 
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/SwiftPackageScripts?color=%2300550&sort=semver" alt="Version" title="Version" />
-    <img src="https://img.shields.io/badge/swift-6.0-orange.svg" alt="Swift 6.0" title="Swift 6.0" />
+    <img src="https://img.shields.io/badge/swift-6.0-orange.svg" alt="Swift 6.1" title="Swift 6.0" />
     <a href="https://danielsaidi.github.io/SwiftPackageScripts"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
     <a href="https://github.com/danielsaidi/SwiftPackageScripts/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/SwiftPackageScripts" alt="MIT License" /></a>
-    <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
 </p>
 
 
@@ -69,11 +68,6 @@ You can then navigate to the folder and sync the scripts to any older folder, us
 This will remove any already existing folder and replace it with the latest version. After the first sync, you can use the `scripts/sync_from.sh` in that project folder to update its scripts.
 
 
-## Support My Work
-
-You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
-
-
 ## Sample Package
 
 This repository has a sample package that is used to test that everything works as expected.
@@ -82,6 +76,11 @@ This repository has a sample package that is used to test that everything works 
 ## Documentation
 
 For more information about these scripts, and how to set up project-specific scripts, see the online [here][Documentation].
+
+
+## Support My Work
+
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
 ## Contact
