@@ -91,10 +91,10 @@ jobs:
       - name: Run framwork script
         run: ./scripts/framework.sh -p iOS --dsyms 1 --zip 1
 
-      - name: Upload XCFramework ZIP
+      - name: Upload XCFramework Container
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.PACKAGE_NAME }}.container
+          name: ${{ env.PACKAGE_NAME }}-Container
           path: .build/${{ env.PACKAGE_NAME }}.zip
           if-no-files-found: error
 
