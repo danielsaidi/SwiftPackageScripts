@@ -10,6 +10,12 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
+## 1.2.2
+
+This version updates all GitHub workflows to cancel all other in-progress runners of the same type.
+
+
+
 ## 1.2.1
 
 This version makes `binary_artifacts.yml` name the container zip differently.
