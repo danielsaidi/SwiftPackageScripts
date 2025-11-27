@@ -26,6 +26,7 @@ This version renames some scripts and adds new CLI tools.
 * `git_default_branch.sh` has been renamed to `git-default-branch.sh`.
 * `release.sh` now requires `--branch|-b` to pass in a branch.
 * `release-validate-git.sh` now requires `--branch|-b` to pass in a branch.
+* `sync_from.sh` has been renamed to `sync-from.sh`. 
 * `validate_git_branch.sh` has been renamed to `release-validate-git.sh`. 
 
 

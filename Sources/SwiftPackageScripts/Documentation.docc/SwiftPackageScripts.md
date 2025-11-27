@@ -18,7 +18,7 @@ The `scripts` folder contains Swift Package-related scripts, that can all be cus
 * `package-name.sh` - Get the name of the main Swift package.
 * `release.sh` - Make a release build with several validation steps.
 * `release-validate-git.sh` - Validate the git repository for release.
-* `sync_from.sh` - Sync `scripts` from a Swift Package Scripts folder.
+* `sync-from.sh` - Sync `scripts` from a Swift Package Scripts folder.
 * `test.sh` - Test a target on all or some platforms.
 * `validate_release.sh` - Validate the package for release.
 * `version_bump.sh` - Bump the current version number and create a new tag.
@@ -55,7 +55,7 @@ You can then navigate to the folder and sync the scripts to any older folder, us
 ./sync_to.sh ../AnotherProjectFolder
 ```
 
-This will remove any already existing folder, and replace it with the latest version. After the first sync, you can use `scripts/sync_from.sh` in the project folder to sync from another folder.
+This will remove any already existing folder, and replace it with the latest version. After the first sync, you can use `scripts/sync-from.sh` in the project folder to sync from another folder.
 
 
 ## Support My Work
