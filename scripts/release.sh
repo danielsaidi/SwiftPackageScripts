@@ -18,7 +18,7 @@ show_usage() {
     echo "This script will:"
     echo "  * Call release-validate-git.sh to validate the git repository for release."
     echo "  * Call release-validate-package.sh to run unit tests, swiftlint, etc."
-    echo "  * Call version_bump.sh if all validation steps above passed"
+    echo "  * Call version-bump.sh if all validation steps above passed"
 
     echo
     echo "Examples:"
@@ -130,7 +130,7 @@ fi
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 SCRIPT_VALIDATE_GIT="$FOLDER/release-validate-git.sh"
 SCRIPT_VALIDATE_PACKAGE="$FOLDER/release-validate-package.sh"
-SCRIPT_VERSION_BUMP="$FOLDER/version_bump.sh"
+SCRIPT_VERSION_BUMP="$FOLDER/version-bump.sh"
 
 # A function that runs a certain script and checks for errors
 run_script() {

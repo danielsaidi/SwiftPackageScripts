@@ -31,8 +31,8 @@ The `scripts` folder contains Swift Package-related scripts, that can all be cus
 * `release-validate-package.sh` - Validate the package for release.
 * `sync-from.sh` - Sync `scripts` from a Swift Package Scripts folder.
 * `test.sh` - Test a target on all or some platforms.
-* `version_bump.sh` - Bump the current version number and create a new tag.
-* `version_number.sh` - Get the current version number from the latest tag.
+* `version-bump.sh` - Bump the current version number and create a new tag.
+* `version-number.sh` - Get the current version number from the latest tag.
 * `xcframework.sh` - Build an XCFramework for all or some platforms.
 
 Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time. You can use `chmod-all.sh` to do this for all `scripts`.

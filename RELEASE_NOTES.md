@@ -24,13 +24,17 @@ This version renames scripts to use dashes and adds new CLI tools.
 
 ## 💥 Breaking changes
 
-* `chmod.sh` has been renamed to `chmod-all.sh`.
-* `git_default_branch.sh` has been renamed to `git-default-branch.sh`.
-* `release.sh` now requires `--branch|-b` to pass in a branch.
-* `release-validate-git.sh` now requires `--branch|-b` to pass in a branch.
-* `sync_from.sh` has been renamed to `sync-from.sh`. 
-* `validate_git_branch.sh` has been renamed to `release-validate-git.sh`.
-* `validate_release.sh` has been renamed to `release-validate-package.sh`. 
+* `.github/workflows/binary_artifacts.yml` has been renamed to `xcframework.yml`.
+* `.github/workflows/version_bump.yml` has been renamed to `version-bump.yml`.
+* `scripts/chmod.sh` has been renamed to `chmod-all.sh`.
+* `scripts/git_default_branch.sh` has been renamed to `git-default-branch.sh`.
+* `scripts/release.sh` now requires `--branch|-b` to pass in a branch.
+* `scripts/release-validate-git.sh` now requires `--branch|-b` to pass in a branch.
+* `scripts/sync_from.sh` has been renamed to `sync-from.sh`. 
+* `scripts/validate_git_branch.sh` has been renamed to `release-validate-git.sh`.
+* `scripts/validate_release.sh` has been renamed to `release-validate-package.sh`.
+* `scripts/version_bump.sh` has been renamed to `version-bump.sh`. 
+* `scripts/version_number.sh` has been renamed to `version-number.sh`. 
 
 
 
