@@ -23,6 +23,8 @@ This version renames some scripts and adds new CLI tools.
 
 * `chmod.sh` has been renamed to `chmod-all.sh`.
 * `git_default_branch.sh` has been renamed to `git-default-branch.sh`.
+* `release-validate-git.sh` now requires `--branch|-b` to pass in a branch.
+* `validate_git_branch.sh` has been renamed to `release-validate-git.sh`. 
 
 
 

@@ -123,7 +123,7 @@ fi
 
 # Use the script folder to refer to other scripts
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-SCRIPT_VALIDATE_GIT="$FOLDER/validate_git_branch.sh"
+SCRIPT_VALIDATE_GIT="$FOLDER/release-validate-git.sh"
 SCRIPT_TEST="$FOLDER/test.sh"
 
 # A function that runs a certain script and checks for errors
