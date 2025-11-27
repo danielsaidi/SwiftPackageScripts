@@ -44,29 +44,6 @@ show_error_and_exit() {
     exit 1
 }
 
-# Function to get default branch name
-get_default_branch() {
-    # Use the script folder to refer to other scripts
-    FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-    SCRIPT_DEFAULT_BRANCH="$FOLDER/git-default-branch.sh"
-
-    if [ -f "$SCRIPT_DEFAULT_BRANCH" ]; then
-        if BRANCH=$("$SCRIPT_DEFAULT_BRANCH" 2>/dev/null); then
-            echo "$BRANCH"
-            return 0
-        fi
-    fi
-
-    # Fallback: check if main or master branch exists
-    if git show-ref --verify --quiet refs/heads/main; then
-        echo "main"
-    elif git show-ref --verify --quiet refs/heads/master; then
-        echo "master"
-    else
-        echo "main"  # Default to main if neither exists
-    fi
-}
-
 # Define argument variables
 BRANCH=""  # Will be set to default after parsing
 
@@ -88,9 +65,18 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Set default branch if none provided
+# If no BRANCH was provided, try to get the default branch name
 if [ -z "$BRANCH" ]; then
-    BRANCH=$(get_default_branch)
+    FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+    SCRIPT_DEFAULT_BRANCH="$FOLDER/git-default-branch.sh"
+
+    if [ ! -f "$SCRIPT_DEFAULT_BRANCH" ]; then
+        show_error_and_exit "Script not found: $SCRIPT_DEFAULT_BRANCH"
+    fi
+
+    if ! BRANCH=$("$SCRIPT_DEFAULT_BRANCH"); then
+        show_error_and_exit "Failed to get default branch"
+    fi
 fi
 
 # Start script

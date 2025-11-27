@@ -13,11 +13,11 @@ Beta version tags and releases are removed after the next minor or major version
 
 ## 2.0
 
-This version renames some scripts and adds new CLI tools.
+This version renames scripts to use dashes and adds new CLI tools.
 
 ## 💡 Changes
 
-* `release.sh` has been refactored to be more optimal.
+* Many scripts has been refactored to be more optimal.
 * `release-validate-git.sh` now uses `git-default-branch.sh`.
 
 ## 💥 Breaking changes

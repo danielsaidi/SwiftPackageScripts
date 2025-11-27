@@ -111,7 +111,7 @@ if [ -z "$TARGET" ]; then
     fi
 fi
 
-# Set default branch if none provided
+# If no BRANCH was provided, try to get the default branch name
 if [ -z "$BRANCH" ]; then
     FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
     SCRIPT_DEFAULT_BRANCH="$FOLDER/git-default-branch.sh"
