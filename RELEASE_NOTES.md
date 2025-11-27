@@ -17,12 +17,14 @@ This version renames some scripts and adds new CLI tools.
 
 ## 💡 Changes
 
+* `release.sh` has been refactored to be more optimal.
 * `release-validate-git.sh` now uses `git-default-branch.sh`.
 
 ## 💥 Breaking changes
 
 * `chmod.sh` has been renamed to `chmod-all.sh`.
 * `git_default_branch.sh` has been renamed to `git-default-branch.sh`.
+* `release.sh` now requires `--branch|-b` to pass in a branch.
 * `release-validate-git.sh` now requires `--branch|-b` to pass in a branch.
 * `validate_git_branch.sh` has been renamed to `release-validate-git.sh`. 
 
