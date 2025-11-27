@@ -10,6 +10,22 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
+## 2.0
+
+This version renames some scripts and adds new CLI tools.
+
+## 💥 Breaking changes
+
+* `chmod.sh` has been renamed to `chmod-all.sh`.
+
+
+
+## 1.3
+
+This version adds a new tools folder with Swift command line tools.
+
+
+
 ## 1.2.2
 
 This version updates all GitHub workflows to cancel all other in-progress runners of the same type.

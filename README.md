@@ -22,7 +22,7 @@ Swift Package Scripts also has a collection of GitHub Actions workflows that let
 The `scripts` folder contains Swift Package-related scripts, that can all be customized with their own parameters:
 
 * `build.sh` - Build a target for all or some platforms.
-* `chmod.sh` - Runs `chmod +x` on all scripts in the script folder.
+* `chmod-all.sh` - Runs `chmod +x` on all scripts in the script folder.
 * `docc.sh` - Build DocC documentation for all or some platforms.
 * `git_default_branch.sh` - Get the default git branch name.
 * `package_name.sh` - Get the name of the main Swift package.
@@ -35,7 +35,7 @@ The `scripts` folder contains Swift Package-related scripts, that can all be cus
 * `version_number.sh` - Get the current version number from the latest tag.
 * `xcframework.sh` - Build an XCFramework for all or some platforms.
 
-Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time. You can use `chmod.sh` to do this for all `scripts`.
+Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time. You can use `chmod-all.sh` to do this for all `scripts`.
 
 
 ## GitHub Actions
