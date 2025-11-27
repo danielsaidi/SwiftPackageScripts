@@ -18,7 +18,7 @@ show_usage() {
     echo "  --hosting-base-path   Optional. Base path for static hosting (default: TARGET name, use empty string \"\" for root)"
 
     echo
-    echo "The documentation ends up in .build/docs-<PLATFORM>."
+    echo "The web transformed documentation ends up in .build/docs-<PLATFORM>."
 
     echo
     echo "Examples:"

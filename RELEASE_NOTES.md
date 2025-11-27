@@ -10,13 +10,19 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
+
 ## 2.0
 
 This version renames some scripts and adds new CLI tools.
 
+## 💡 Changes
+
+* `release-validate-git.sh` now uses `git-default-branch.sh`.
+
 ## 💥 Breaking changes
 
 * `chmod.sh` has been renamed to `chmod-all.sh`.
+* `git_default_branch.sh` has been renamed to `git-default-branch.sh`.
 
 
 
@@ -51,7 +57,7 @@ The binary artifact workflow has been adjusted to upload a container zip file, t
 
 ## 💡 Changes
 
-* `xcframework-binaries.yml` is reneamed to `binary_artifacts.yml`.
+* `xcframework-binaries.yml` is renamed to `binary_artifacts.yml`.
 * `xcframework-binaries.yml` now uploads a container zip file that needs additional handling.
 
 

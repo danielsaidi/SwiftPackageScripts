@@ -15,7 +15,6 @@ show_usage() {
     echo
     echo "Examples:"
     echo "  $0"
-    echo "  bash scripts/git_default_branch.sh"
     echo
 }
 

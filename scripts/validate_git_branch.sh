@@ -78,14 +78,7 @@ done
 
 # Set default branch if none provided
 if [ -z "$BRANCH" ]; then
-    # Check if main or master branch exists and set default accordingly
-    if git show-ref --verify --quiet refs/heads/main; then
-        BRANCH="main"
-    elif git show-ref --verify --quiet refs/heads/master; then
-        BRANCH="master"
-    else
-        BRANCH="main"  # Default to main if neither exists
-    fi
+    BRANCH=$(get_default_branch)
 fi
 
 # Start script
