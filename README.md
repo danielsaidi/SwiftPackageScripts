@@ -25,7 +25,7 @@ The `scripts` folder contains Swift Package-related scripts, that can all be cus
 * `chmod-all.sh` - Runs `chmod +x` on all scripts in the script folder.
 * `docc.sh` - Build DocC documentation for all or some platforms.
 * `git-default-branch.sh` - Get the default git branch name.
-* `package_name.sh` - Get the name of the main Swift package.
+* `package-name.sh` - Get the name of the main Swift package.
 * `release.sh` - Make a release build with several validation steps.
 * `release-validate-git.sh` - Validate the git repository for release.
 * `sync_from.sh` - Sync `scripts` from a Swift Package Scripts folder.

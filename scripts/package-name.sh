@@ -6,7 +6,7 @@ set -e
 # Function to display usage information
 show_usage() {
     echo
-    echo "This script finds the main target name in Package.swift."
+    echo "This script finds the main package name."
 
     echo
     echo "Usage: $0 [OPTIONS]"
@@ -15,7 +15,6 @@ show_usage() {
     echo
     echo "Examples:"
     echo "  $0"
-    echo "  bash scripts/package_name.sh"
     echo
 }
 

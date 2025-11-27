@@ -54,7 +54,7 @@ jobs:
 
       - name: Get Package Name
         run: |
-          PACKAGE_NAME=$(./scripts/package_name.sh)
+          PACKAGE_NAME=$(./scripts/package-name.sh)
           echo "PACKAGE_NAME=$PACKAGE_NAME" >> $GITHUB_ENV
 
       - name: Install build certificate

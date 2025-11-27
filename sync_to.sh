@@ -5,7 +5,7 @@
 # This script will overwrite any existing folder with this one.
 
 # Usage:
-# package_name.sh <FOLDER>
+# sync_to.sh <FOLDER>
 # e.g. `bash sync_to.sh ../MyPackage`
 
 # Define argument variables
