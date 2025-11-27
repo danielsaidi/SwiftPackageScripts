@@ -18,7 +18,9 @@ This version renames scripts to use dashes and adds new CLI tools.
 ## 💡 Changes
 
 * Many scripts has been refactored to be more optimal.
+* `release.sh` now calls `release-validate-git.sh`.
 * `release-validate-git.sh` now uses `git-default-branch.sh`.
+* `release-validate-package.sh` no longer calls `release-validate-git.sh`.
 
 ## 💥 Breaking changes
 
@@ -27,7 +29,8 @@ This version renames scripts to use dashes and adds new CLI tools.
 * `release.sh` now requires `--branch|-b` to pass in a branch.
 * `release-validate-git.sh` now requires `--branch|-b` to pass in a branch.
 * `sync_from.sh` has been renamed to `sync-from.sh`. 
-* `validate_git_branch.sh` has been renamed to `release-validate-git.sh`. 
+* `validate_git_branch.sh` has been renamed to `release-validate-git.sh`.
+* `validate_release.sh` has been renamed to `release-validate-package.sh`. 
 
 
 

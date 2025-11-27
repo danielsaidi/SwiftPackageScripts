@@ -85,8 +85,11 @@ jobs:
         with:
           xcode-version: 16.4 # latest-stable
 
-      - name: Validate Project
-        run: ./scripts/validate_release.sh -p iOS --swiftlint 0
+      - name: Validate git
+        run: ./scripts/release-validate-git.sh
+
+      - name: Validate project
+        run: ./scripts/release-validate-package.sh -p iOS --swiftlint 0
 
       - name: Run framwork script
         run: ./scripts/framework.sh -p iOS --dsyms 1 --zip 1

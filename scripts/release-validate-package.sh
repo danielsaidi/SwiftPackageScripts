@@ -6,7 +6,7 @@ set -e
 # Function to display usage information
 show_usage() {
     echo
-    echo "This script validates a <TARGET> for release by checking the git repo, then running lint and unit tests for all platforms."
+    echo "This script validates a <TARGET> for release by running lint and unit tests for all platforms."
 
     echo
     echo "Usage: $0 [TARGET] [-p|--platforms <PLATFORM1> <PLATFORM2> ...]"
@@ -18,7 +18,7 @@ show_usage() {
     echo "This script will:"
     echo "  * Validate that swiftlint passes"
     echo "  * Validate that all unit tests pass for all platforms"
-    
+
     echo
     echo "Examples:"
     echo "  $0"
@@ -58,13 +58,13 @@ while [[ $# -gt 0 ]]; do
         -p|--platforms)
             shift  # Remove --platforms from arguments
             PLATFORMS=""  # Clear default platforms
-            
+
             # Collect all platform arguments until we hit another flag or run out of args
             while [[ $# -gt 0 && ! "$1" =~ ^- ]]; do
                 PLATFORMS="$PLATFORMS $1"
                 shift
             done
-            
+
             # Remove leading space and check if we got any platforms
             PLATFORMS=$(echo "$PLATFORMS" | sed 's/^ *//')
             if [ -z "$PLATFORMS" ]; then
@@ -110,7 +110,6 @@ fi
 
 # Use the script folder to refer to other scripts
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-SCRIPT_VALIDATE_GIT="$FOLDER/release-validate-git.sh"
 SCRIPT_TEST="$FOLDER/test.sh"
 
 # A function that runs a certain script and checks for errors
@@ -142,10 +141,6 @@ if [ "$SWIFTLINT" = "1" ]; then
 else
     echo "Skipping SwiftLint (disabled)"
 fi
-
-# Validate git
-echo "Validating git..."
-run_script "$SCRIPT_VALIDATE_GIT"
 
 # Run unit tests
 echo "Running unit tests..."

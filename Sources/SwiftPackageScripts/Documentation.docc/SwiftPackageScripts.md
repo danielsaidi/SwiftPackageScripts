@@ -17,10 +17,10 @@ The `scripts` folder contains Swift Package-related scripts, that can all be cus
 * `git-default-branch.sh` - Get the default git branch name.
 * `package-name.sh` - Get the name of the main Swift package.
 * `release.sh` - Make a release build with several validation steps.
-* `release-validate-git.sh` - Validate the git repository for release.
+* `release-validate-git.sh` - Validate the git repo for release.
+* `release-validate-package.sh` - Validate the package for release.
 * `sync-from.sh` - Sync `scripts` from a Swift Package Scripts folder.
 * `test.sh` - Test a target on all or some platforms.
-* `validate_release.sh` - Validate the package for release.
 * `version_bump.sh` - Bump the current version number and create a new tag.
 * `version_number.sh` - Get the current version number from the latest tag.
 * `xcframework.sh` - Build an XCFramework for all or some platforms.
