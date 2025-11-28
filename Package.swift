@@ -4,11 +4,12 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftPackageScripts",
+    defaultLocalization: "en",
     platforms: [
-        .iOS(.v14),
-        .macOS(.v11),
+        .iOS(.v16),
+        .macOS(.v14),
         .tvOS(.v16),
-        .watchOS(.v7),
+        .watchOS(.v9),
         .visionOS(.v1)
     ],
     products: [
@@ -19,7 +20,9 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "SwiftPackageScripts"),
+            name: "SwiftPackageScripts",
+            resources: [.process("Resources")]
+        ),
         .testTarget(
             name: "SwiftPackageScriptsTests",
             dependencies: ["SwiftPackageScripts"]

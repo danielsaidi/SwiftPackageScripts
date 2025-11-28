@@ -13,7 +13,17 @@ Beta version tags and releases are removed after the next minor or major version
 
 ## 2.0
 
-This version renames scripts to use dashes and adds new CLI tools.
+This version renames several scripts to use dashes instead of underline.
+
+This version also adds ways to generate public localization keys for a string catalog's otherwise internal keys. This makes it possible to access the keys from other apps and packages.
+
+This version also adds a new CLI tool called `StringCatalogPublicKeyBuilder` and a script called `l10n-gen` which can be used to easily generate a public translation key file for any package. 
+
+Due to the localized string key support, the package now targets iOS 16.
+
+## ✨ Features
+
+* `StringCatalog` is a new struct that can parse Xcode string catalogs.
 
 ## 💡 Changes
 

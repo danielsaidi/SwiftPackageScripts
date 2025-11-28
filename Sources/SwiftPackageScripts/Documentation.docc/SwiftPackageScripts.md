@@ -88,6 +88,11 @@ Feel free to reach out if you have questions or if you want to contribute in any
 Swift Package Scripts is available under the MIT license. See the [LICENSE][License] file for more info.
 
 
+## Topics
+
+- ``StringCatalog``
+
+
 [Email]: mailto:daniel.saidi@gmail.com
 [Website]: https://www.danielsaidi.com
 [GitHub]: https://www.github.com/danielsaidi
