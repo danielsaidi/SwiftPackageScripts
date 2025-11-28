@@ -11,20 +11,20 @@ import SwiftUI
 #Preview("Internal L10n Keys") {
 
   NavigationStack {
-    VStack {
-      // Internal L10n keys
-      Button(.generalButtonClose) {
-        print("Close")
-      }
-      .badged(color: .blue)
-
-      Text(.generalNotificationBadgeItemsCount(10))
-        .badged(color: .red)
-
-      Text(.generalNotificationBadgeWarning("Danger, danger!"))
-        .badged(color: .orange)
-    }
-    .navigationTitle(.appHomeScreenTitle)
+//    VStack {
+//      // Internal L10n keys
+//      Button(.l10n.general.button.close) {
+//        print("Close")
+//      }
+//      .badged(color: .blue)
+//
+//      Text(.l10n.general.notificationBadge.itemsCount(10))
+//        .badged(color: .red)
+//
+//      Text(.l10n.general.notificationBadge.warning("Danger, danger!"))
+//        .badged(color: .orange)
+//    }
+//    .navigationTitle(.l10n.app.homeScreen.title)
   }
 }
 

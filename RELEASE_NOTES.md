@@ -15,24 +15,31 @@ Beta version tags and releases are removed after the next minor or major version
 
 This version renames several scripts to use dashes instead of underline.
 
-This version also adds ways to generate public localization keys for a string catalog's otherwise internal keys. This makes it possible to access the keys from other apps and packages.
+This version adds ways to generate public localization keys for a string catalog's otherwise internal keys. 
 
-This version also adds a new CLI tool called `StringCatalogPublicKeyBuilder` and a script called `l10n-gen` which can be used to easily generate a public translation key file for any package. 
+This makes it possible to access the keys from other apps and packages and also manages the default bundle.
 
-Due to the localized string key support, the package now targets iOS 16.
+This version also adds a brand new CLI tool called `StringCatalogKeyBuilder` and a script called `l10n-gen`.
+
+This CLI tool and script can be used to generate a file with a public localization key code for any package. 
 
 ## ✨ Features
 
 * `StringCatalog` is a new struct that can parse Xcode string catalogs.
+* `scripts/l10n-gen` is a new Terminal script for parsing string catalogs.
+* `tools/StringCatalogKeyBuilder` is a new CLI tool for parsing string catalogs.
 
 ## 💡 Changes
 
 * Many scripts has been refactored to be more optimal.
+
 * `release.sh` now calls `release-validate-git.sh`.
 * `release-validate-git.sh` now uses `git-default-branch.sh`.
 * `release-validate-package.sh` no longer calls `release-validate-git.sh`.
 
 ## 💥 Breaking changes
+
+Due to the localized string key support, the package now targets iOS 16.
 
 * `.github/workflows/binary_artifacts.yml` has been renamed to `xcframework.yml`.
 * `.github/workflows/version_bump.yml` has been renamed to `version-bump.yml`.
