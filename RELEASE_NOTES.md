@@ -15,19 +15,15 @@ Beta version tags and releases are removed after the next minor or major version
 
 This version renames several scripts to use dashes instead of underline.
 
-This version adds ways to generate public localization keys for a string catalog's otherwise internal keys. 
+This version adds tools for generating public localization keys for a string catalog. This makes it possible to use a package's internal localization keys from other targets.
 
-This makes it possible to access the keys from other apps and packages and also manages the default bundle.
-
-This version also adds a brand new CLI tool called `StringCatalogKeyBuilder` and a script called `l10n-gen`.
-
-This CLI tool and script can be used to generate a file with a public localization key code for any package. 
+This version also adds a CLI tool called `StringCatalogKeyBuilder` and a script called `l10n-gen.sh`, which can generate a public localization key swift file for any package. 
 
 ## ✨ Features
 
 * `StringCatalog` is a new struct that can parse Xcode string catalogs.
-* `scripts/l10n-gen` is a new Terminal script for parsing string catalogs.
-* `tools/StringCatalogKeyBuilder` is a new CLI tool for parsing string catalogs.
+* `scripts/l10n-gen.sh` is a new Terminal script for parsing string catalogs.
+* `scripts/tools/StringCatalogKeyBuilder` is a new CLI tool for parsing string catalogs.
 
 ## 💡 Changes
 

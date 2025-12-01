@@ -15,7 +15,7 @@ let package = Package(
   dependencies: [
     .package(
       name: "SwiftPackageScripts",
-      path: "../../"
+      path: "../../../"
     ),
     .package(
       url: "https://github.com/apple/swift-argument-parser.git",

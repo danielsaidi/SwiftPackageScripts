@@ -161,7 +161,7 @@ else
 fi
 
 # Define the tool directory
-TOOL_DIR="tools/StringCatalogKeyBuilder"
+TOOL_DIR="scripts/tools/StringCatalogKeyBuilder"
 
 # Verify tool directory exists
 if [ ! -d "$TOOL_DIR" ]; then
@@ -180,6 +180,5 @@ echo "Running: swift run l10n-gen $ARGS"
 (cd "$TOOL_DIR" && eval "swift run l10n-gen $ARGS")
 
 # Complete successfully
-echo
 echo "Code generation completed successfully!"
 echo
