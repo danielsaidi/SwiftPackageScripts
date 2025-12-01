@@ -10,33 +10,33 @@ import SwiftUI
 
 #Preview("Internal L10n Keys") {
 
-  NavigationStack {
-//    VStack {
-//      // Internal L10n keys
-//      Button(.l10n.general.button.close) {
-//        print("Close")
-//      }
-//      .badged(color: .blue)
-//
-//      Text(.l10n.general.notificationBadge.itemsCount(10))
-//        .badged(color: .red)
-//
-//      Text(.l10n.general.notificationBadge.warning("Danger, danger!"))
-//        .badged(color: .orange)
-//    }
-//    .navigationTitle(.l10n.app.homeScreen.title)
-  }
+    NavigationStack {
+        //    VStack {
+        //      // Internal L10n keys
+        //      Button(.l10n.general.button.close) {
+        //        print("Close")
+        //      }
+        //      .badged(color: .blue)
+        //
+        //      Text(.l10n.general.notificationBadge.itemsCount(10))
+        //        .badged(color: .red)
+        //
+        //      Text(.l10n.general.notificationBadge.warning("Danger, danger!"))
+        //        .badged(color: .orange)
+        //    }
+        //    .navigationTitle(.l10n.app.homeScreen.title)
+    }
 }
 
 extension View {
 
-  func badged(color: Color) -> some View {
-    self
-      .padding(5)
-      .padding(.horizontal, 5)
-      .background(color)
-      .foregroundStyle(.white)
-      .tint(.white)
-      .clipShape(.capsule)
-  }
+    func badged(color: Color) -> some View {
+        self
+            .padding(5)
+            .padding(.horizontal, 5)
+            .background(color)
+            .foregroundStyle(.white)
+            .tint(.white)
+            .clipShape(.capsule)
+    }
 }
