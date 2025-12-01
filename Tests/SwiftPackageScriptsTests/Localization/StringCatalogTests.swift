@@ -1,5 +1,5 @@
 //
-//  StringCatalogTests.swift
+//  StringCatalog+PublicKeysTests.swift
 //  SwiftPackageScriptsTests
 //
 //  Created by Daniel Saidi on 2025-11-28.
@@ -10,8 +10,7 @@ import Foundation
 import SwiftPackageScripts
 import Testing
 
-@Suite class StringCatalogTests {
-    let json = """
+let stringCatalogJson = """
   {
     "sourceLanguage" : "en",
     "strings" : {
@@ -76,6 +75,8 @@ import Testing
   }
   """
 
+@Suite("StringCatalogTests")
+class StringCatalogTests {
     let expected = """
   import Foundation
   
@@ -103,7 +104,7 @@ import Testing
   """
 
     @Test func canParseJsonString() async throws {
-        let catalog = try StringCatalog(json: json)
+        let catalog = try StringCatalog(json: stringCatalogJson)
         #expect(catalog.sourceLanguage == "en")
         #expect(catalog.strings.sorted() == [
             "App.HomeScreen.Title",
@@ -115,7 +116,7 @@ import Testing
     }
 
     @Test func canParseJsonData() async throws {
-        let data = Data(json.utf8)
+        let data = Data(stringCatalogJson.utf8)
         let catalog = try StringCatalog(data: data)
         #expect(catalog.sourceLanguage == "en")
         #expect(catalog.strings.sorted() == [
@@ -125,18 +126,5 @@ import Testing
             "General.NotificationBadge.Warning %@"
         ])
         #expect(catalog.version == "1.1")
-    }
-
-    @Test func canGeneratePublicKeyWrappersWithCustomIndentSize() async throws {
-        let catalog = try StringCatalog(json: json)
-        let wrapperCode = catalog.generatePublicKeyWrappers(indentSize: 2)
-        #expect(wrapperCode == expected)
-    }
-
-    @Test func canGeneratePublicKeyWrappersWithCustomRootNamespace() async throws {
-        let catalog = try StringCatalog(json: json)
-        let wrapperCode = catalog.generatePublicKeyWrappers(withRootNamespace: "sps", indentSize: 2)
-        let expected = expected.replacingOccurrences(of: "enum l10n", with: "enum sps")
-        #expect(wrapperCode == expected)
     }
 }

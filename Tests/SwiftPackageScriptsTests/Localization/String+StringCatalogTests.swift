@@ -11,8 +11,8 @@ import Foundation
 
 @testable import SwiftPackageScripts
 
-@Suite("StringL10nParamsTests")
-struct StringL10nParamsTests {
+@Suite("String+StringCatalogTests")
+struct String_StringCatalogTests {
 
     @Test func noParameters() {
         let result = "Simple string without parameters".parseStringCatalogParameters()
