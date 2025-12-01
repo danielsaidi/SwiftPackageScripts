@@ -11,5 +11,5 @@ SOURCE="$PACKAGE$CATALOG"
 TARGET="$PACKAGE$FILE"
 
 # Run the Swift CLI tool
-# ./scripts/l10n-gen.sh --from $SOURCE --to $TARGET
-./scripts/l10n-gen.sh --package $PACKAGE --catalog $CATALOG --target $FILE
+./scripts/l10n-gen.sh --from $SOURCE --to $TARGET # --root sps
+#./scripts/l10n-gen.sh --package $PACKAGE --catalog $CATALOG --target $FILE

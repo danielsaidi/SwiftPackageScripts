@@ -10,8 +10,8 @@ show_usage() {
 
     echo
     echo "Usage:"
-    echo "  $0 --from <CATALOG_PATH> --to <OUTPUT_PATH>"
-    echo "  $0 --package <PACKAGE_PATH> --catalog <CATALOG_PATH> --target <TARGET_PATH>"
+    echo "  $0 --from <CATALOG_PATH> --to <OUTPUT_PATH> [--root <ROOT_NAMESPACE>]"
+    echo "  $0 --package <PACKAGE_PATH> --catalog <CATALOG_PATH> --target <TARGET_PATH> [--root <ROOT_NAMESPACE>]"
 
     echo
     echo "Options:"
@@ -20,12 +20,17 @@ show_usage() {
     echo "  --package       Command-relative path to a Swift Package"
     echo "  --catalog       Package-relative path to the string catalog"
     echo "  --target        Package-relative path to the target output file"
+    echo "  --root          The root namespace of the key hierarchy, by default l10n."
     echo "  -h, --help      Show this help message"
 
     echo
     echo "Examples:"
     echo "  $0 --from Resources/Localizable.xcstrings --to Sources/Generated/L10n.swift"
-    echo "  $0 --package Sources/MyPackage/ --catalog Resources/Localizable.xcstrings --target Generated/L10n.swift"
+    echo "  $0 --package Sources/MyPackage/ --catalog Resources/Localizable.xcstrings --target Generated/L10n.swift --root myPackageName"
+
+    echo
+    echo "Important:"
+    echo "  This script calls out to the Swift-based CLI tools/StringCatalogKeyBuilder."
     echo
 }
 
@@ -56,6 +61,7 @@ TO=""
 PACKAGE=""
 CATALOG=""
 TARGET=""
+ROOT=""
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -72,6 +78,8 @@ while [[ $# -gt 0 ]]; do
             CATALOG="$2"; shift 2 ;;
         --target)
             TARGET="$2"; shift 2 ;;
+        --root)
+            ROOT="$2"; shift 2 ;;
         -*)
             show_error_and_exit "Unknown option $1" ;;
         *)
@@ -110,6 +118,11 @@ if [ -n "$FROM" ] || [ -n "$TO" ]; then
     # Build arguments
     ARGS="--from \"$FROM_ABS\" --to \"$TO_ABS\""
 
+    # Add root namespace if specified
+    if [ -n "$ROOT" ]; then
+        ARGS="$ARGS --root \"$ROOT\""
+    fi
+
 elif [ -n "$PACKAGE" ] || [ -n "$CATALOG" ] || [ -n "$TARGET" ]; then
     # Using --package/--catalog/--target mode
     if [ -z "$PACKAGE" ]; then
@@ -137,6 +150,11 @@ elif [ -n "$PACKAGE" ] || [ -n "$CATALOG" ] || [ -n "$TARGET" ]; then
 
     # Build arguments
     ARGS="--package \"$PACKAGE_ABS/\" --catalog \"$CATALOG\" --target \"$TARGET\""
+
+    # Add root namespace if specified
+    if [ -n "$ROOT" ]; then
+        ARGS="$ARGS --root \"$ROOT\""
+    fi
 
 else
     show_error_and_exit "Either --from/--to or --package/--catalog/--target must be provided"

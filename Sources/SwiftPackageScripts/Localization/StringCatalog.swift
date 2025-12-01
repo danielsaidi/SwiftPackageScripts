@@ -85,7 +85,9 @@ private extension StringCatalog {
 public extension StringCatalog {
 
   /// Generate public key wrappers from the string catalog's internal keys.
-  func generatePublicKeyWrappers() -> String {
+  func generatePublicKeyWrappers(
+    withRootNamespace root: String = "l10n",
+  ) -> String {
     var tree: [String: Any] = [:]
     
     for key in strings {
@@ -102,7 +104,7 @@ public extension StringCatalog {
     output += "// THIS IS A GENERATED FILE\n"
     output += "// Add your keys to the string catalog and run `make l10n-gen` to update it.\n"
     output += "public extension LocalizedStringResource {\n\n"
-    output += "  enum l10n {\n"
+    output += "  enum \(root) {\n"
 
     for (namespace, value) in tree.sorted(by: { $0.key < $1.key }) {
       let enumName = namespace.prefix(1).lowercased() + namespace.dropFirst()
