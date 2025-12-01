@@ -28,6 +28,7 @@ This version also adds a CLI tool called `StringCatalogKeyBuilder` and a script 
 ## 💡 Changes
 
 * Many scripts has been refactored to be more optimal.
+* All workflows now target the latest macOS and Xcode.
 
 * `release.sh` now calls `release-validate-git.sh`.
 * `release-validate-git.sh` now uses `git-default-branch.sh`.
