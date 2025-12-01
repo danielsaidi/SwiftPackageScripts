@@ -48,6 +48,7 @@ Due to the localized string key support, the package now targets iOS 16.
 * `scripts/release.sh` now requires `--branch|-b` to pass in a branch.
 * `scripts/release-validate-git.sh` now requires `--branch|-b` to pass in a branch.
 * `scripts/sync_from.sh` has been renamed to `sync-from.sh`. 
+* `sync_to.sh` has been moved to `scripts` and is renamed to `sync-to.sh`. 
 * `scripts/validate_git_branch.sh` has been renamed to `release-validate-git.sh`.
 * `scripts/validate_release.sh` has been renamed to `release-validate-package.sh`.
 * `scripts/version_bump.sh` has been renamed to `version-bump.sh`. 

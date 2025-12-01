@@ -13,8 +13,7 @@ show_usage() {
     echo "  <SOURCE_FOLDER>       Required. The full path to a Swift Package Scripts root"
     
     echo
-    echo "This script will overwrite the existing 'scripts' folder."
-    echo "Only pass in the full path to a Swift Package Scripts root."
+    echo "The script will replace the existing 'scripts' folder."
     
     echo
     echo "Examples:"
