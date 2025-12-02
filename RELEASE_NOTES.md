@@ -23,6 +23,7 @@ This version also adds a CLI tool called `StringCatalogKeyBuilder` and a script 
 
 * `StringCatalog` is a new struct that can parse Xcode string catalogs.
 * `scripts/l10n-gen.sh` is a new Terminal script for parsing string catalogs.
+* `scripts/sync-to.sh` and `scripts/sync-from.sh` can now sync `.github/workflows` too.
 * `scripts/tools/StringCatalogKeyBuilder` is a new CLI tool for parsing string catalogs.
 
 ## 💡 Changes
