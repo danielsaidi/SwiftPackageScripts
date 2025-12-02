@@ -14,41 +14,7 @@
 
 Swift Package Scripts has Terminal scripts that can be used to build and test your package, build DocC and deploy it to GitHub Pages, generate XCFramework binary artifacts, create new semantic versions, etc.
 
-Swift Package Scripts also has a collection of GitHub Actions workflows that let you perform some operations from the GitHub Actions dashboard.
-
-
-## Scripts
-
-The `scripts` folder contains Swift Package-related scripts, that can all be customized with their own parameters:
-
-* `build.sh` - Build a target for all or some platforms.
-* `chmod-all.sh` - Runs `chmod +x` on all scripts in the script folder.
-* `docc.sh` - Build DocC documentation for all or some platforms.
-* `git-default-branch.sh` - Get the default git branch name.
-* `package-name.sh` - Get the name of the main Swift package.
-* `release.sh` - Make a release build with several validation steps.
-* `release-validate-git.sh` - Validate the git repo for release.
-* `release-validate-package.sh` - Validate the package for release.
-* `sync-from.sh` - Sync `scripts` from a Swift Package Scripts folder.
-* `test.sh` - Test a target on all or some platforms.
-* `version-bump.sh` - Bump the current version number and create a new tag.
-* `version-number.sh` - Get the current version number from the latest tag.
-* `xcframework.sh` - Build an XCFramework for all or some platforms.
-
-Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time. You can use `chmod-all.sh` to do this for all `scripts`.
-
-
-## GitHub Actions
-
-The `.github` folder contains the following GitHub Actions workflows:
-
-* `binary_artifacts.yml` - Build an XCFramework and dSYMs for all or some platforms.
-* `build.yml` - Build the package for all or some platforms.
-* `docc.yml` - Build DocC documentation and deploy it to GitHub Pages.
-* `test.yml` - Test the package on all or some platforms.
-* `version_bump.yml` - Bump the current version number and create a new tag.
-
-Have a look at each file for workflow-specific information and if there is anything you need to do to make it work.
+Swift Package Scripts also has a collection of GitHub Actions workflows that can run some scripts from the GitHub Actions dashboard.
 
 
 ## Installation
@@ -59,13 +25,62 @@ Swift Package Scripts can be installed to your computer by cloning the repositor
 git clone https://github.com/danielsaidi/SwiftPackageScripts.git
 ```
 
-You can then navigate to the folder and sync the scripts to any older folder, using the `/sync_to.sh` script.
+You can then navigate to the folder and sync the scripts to any older folder, using the `/sync-to.sh` script.
 
 ```shell
-./sync_to.sh ../AnotherProjectFolder
+./sync-to.sh ../AnotherPackage [--github-workflows 1]
 ```
 
-This will remove any already existing folder and replace it with the latest version. After the first sync, you can use the `scripts/sync-from.sh` in that project folder to update its scripts.
+This will replace any existing scripts with the latest versions. After this, you can use `scripts/sync-from.sh` in that project folder.
+
+
+## Scripts
+
+The `scripts` folder contains Swift Package-related scripts, that can all be customized with their own parameters:
+
+* `build.sh` - Build a target for all or some platforms.
+* `chmod-all.sh` - Runs `chmod +x` on all scripts in the script folder.
+* `docc.sh` - Build DocC documentation for all or some platforms.
+* `git-default-branch.sh` - Get the default git branch name.
+* `l10n-gen.sh` - Generate public translation key wrappers from an Xcode 26 string catalog.
+* `package-name.sh` - Get the name of the main Swift package.
+* `release.sh` - Make a release build with several validation steps.
+* `release-validate-git.sh` - Validate the git repo for release.
+* `release-validate-package.sh` - Validate the package for release.
+* `sync-from.sh` - Sync `scripts` and `.github/workflows` from a Swift Package Scripts folder.
+* `sync-to.sh` - Sync `scripts` and `.github/workflows` to another package folder.
+* `test.sh` - Test a target on all or some platforms.
+* `version-bump.sh` - Bump the current version number and create a new tag.
+* `version-number.sh` - Get the current version number from the latest tag.
+* `xcframework.sh` - Build an XCFramework for all or some platforms.
+
+All scripts have a `--help` command, e.g. `./scripts/build.sh --help`. Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time.
+
+
+## GitHub Action Workflows
+
+The `.github` folder contains the following GitHub Actions workflows:
+
+* `build.yml` - Build the package for all or some platforms.
+* `docc.yml` - Build DocC documentation and deploy it to GitHub Pages.
+* `test.yml` - Test the package on all or some platforms.
+* `version_bump.yml` - Bump the current version number and create a new tag.
+* `xcframework.yml` - Build an XCFramework and dSYMs for all or some platforms.
+
+Have a look at each file for workflow-specific information and if there is anything you need to do to make it work.
+
+
+## String Catalog Support
+
+SwiftPackageScripts has an `l10n-gen.sh` script that can generate public, namespaced key wrappers from any Xcode string catalog.
+
+Once generated, these public keys can be used from any package and app, wherever a `LocalizedStringResource` is expected:
+
+```swift
+Text(.l10n.myapp.onboardings.welcome.title)
+```
+
+You can read more about this in the [localization][Localization] article.
 
 
 ## Sample Package
@@ -106,5 +121,6 @@ Swift Package Scripts is available under the MIT license. See the [LICENSE][Lice
 [Sponsors]: https://github.com/sponsors/danielsaidi
 [OpenSource]: https://www.danielsaidi.com/opensource
 
-[Documentation]: https://danielsaidi.github.io/SwiftPackageScripts/
+[Documentation]: https://danielsaidi.github.io/swiftpackagescripts/
+[Localization]: https://danielsaidi.github.io/swiftpackagescripts/documentation/swiftpackagescripts/localization-article
 [License]: https://github.com/danielsaidi/SystemNotification/blob/master/LICENSE
