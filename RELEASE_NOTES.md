@@ -13,13 +13,12 @@ Beta version tags and releases are removed after the next minor or major version
 
 ## 2.0.1
 
-This version makes `StringCatalogKeyBuilder` tool independent of `SwiftPackageScripts`.
-
-This solves a bug where the script would crash in other packages, due to a missing path.
+This version makes `StringCatalogKeyBuilder` tool independent of `SwiftPackageScripts`. This solves a bug where the script would crash in other packages, due to a missing path.
 
 ## 🐛 Bug Fixes
 
 * `tools/StringCatalogKeyBuilder` no longer needs the main package to function.
+* `tools/StringCatalogKeyBuilder` no longer fails if the target folder doesn't exist.
 
 
 
