@@ -13,10 +13,17 @@ Beta version tags and releases are removed after the next minor or major version
 
 ## 2.0.1
 
-This version makes `StringCatalogKeyBuilder` tool independent of `SwiftPackageScripts`. This solves a bug where the script would crash in other packages, due to a missing path.
+This version makes `StringCatalogKeyBuilder` tool independent of `SwiftPackageScripts`. This solves a bug where it would crash in other package folders.
+
+This version also fixes a bug where trying to use the CLI to write to a non-existing folder would not work, by upgrading both the `l10n-gen` script and the CLI tool.
+
+## 💡 Changes
+
+* The `StringCatalogKeyBuilder` CLI tool now builds on all platforms.
 
 ## 🐛 Bug Fixes
 
+* `scripts/l10n-gen` no longer fails if the target folder doesn't exist.
 * `tools/StringCatalogKeyBuilder` no longer needs the main package to function.
 * `tools/StringCatalogKeyBuilder` no longer fails if the target folder doesn't exist.
 
