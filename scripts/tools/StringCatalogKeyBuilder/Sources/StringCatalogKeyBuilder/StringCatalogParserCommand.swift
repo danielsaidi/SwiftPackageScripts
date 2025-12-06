@@ -1,8 +1,6 @@
 import ArgumentParser
 import Foundation
 
-import SwiftPackageScripts
-
 /// This command can be used to parse a string catalog and generate
 /// Swift code that allows other targets to access its internal keys.
 struct StringCatalogParserCommand: ParsableCommand {
