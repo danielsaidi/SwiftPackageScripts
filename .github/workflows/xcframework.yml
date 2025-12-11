@@ -92,7 +92,7 @@ jobs:
         run: ./scripts/release-validate-package.sh -p iOS --swiftlint 0
 
       - name: Run framwork script
-        run: ./scripts/framework.sh -p iOS --dsyms 1 --zip 1
+        run: ./scripts/xcframework.sh -p iOS --dsyms 1 --zip 1
 
       - name: Upload XCFramework Container
         uses: actions/upload-artifact@v4

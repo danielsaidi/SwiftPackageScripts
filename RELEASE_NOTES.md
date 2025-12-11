@@ -10,6 +10,17 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
+## 2.0.2
+
+### 💡 Changes
+
+* `scripts/git-default-branch-name.sh` now supports a fallback result.
+
+### 🐛 Bug Fixes
+
+* `github/workflows/xcframework.sh` had an old script name reference.
+
+
 
 ## 2.0.1
 
