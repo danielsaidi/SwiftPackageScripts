@@ -40,6 +40,16 @@ This version also fixes a bug where trying to use the CLI to write to a non-exis
 
 
 
+## 2.1
+
+This version adds new scripts and multiplatform DocC support.
+
+## ✨ Features
+
+* `scripts/package-platforms.sh` is a new script for getting all supported platforms.
+
+
+
 ## 2.0
 
 This version renames several scripts to use dashes instead of underline.
