@@ -10,6 +10,24 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
+## 2.1
+
+This version adds new scripts and multiplatform DocC support.
+
+The new `docc-multiplatform` workflow is currently manual, until it's verified that it works well. After that, it should be merged with the `docc` workflow.
+
+## ✨ Features
+
+* `scripts/docc-multiplatform.sh` is a new script for building multiplatform DocC.
+* `scripts/package-platforms.sh` is a new script for getting all supported platforms for the main Swift package.
+
+## 💡 Changes
+
+* `.github/workflows/docc.yml` now supports picking a specific platform or "multiplatform".
+* `.github/workflows/docc-multiplatform.yml` is a new, manual workflow for deploying multiplatform DocC documentation to GitHub pages.
+
+
+
 ## 2.0.2
 
 ### 💡 Changes
@@ -37,22 +55,6 @@ This version also fixes a bug where trying to use the CLI to write to a non-exis
 * `scripts/l10n-gen` no longer fails if the target folder doesn't exist.
 * `tools/StringCatalogKeyBuilder` no longer needs the main package to function.
 * `tools/StringCatalogKeyBuilder` no longer fails if the target folder doesn't exist.
-
-
-
-## 2.1
-
-This version adds new scripts and multiplatform DocC support.
-
-## ✨ Features
-
-* `scripts/docc-multiplatform.sh` is a new script for building multiplatform DocC.
-* `scripts/package-platforms.sh` is a new script for getting all supported platforms.
-
-## 💡 Changes
-
-* `.github/workflows/docc.sh` now supports picking a specific platform or "multiplatform".
-* `.github/workflows/docc.sh` now defaults to "multiplatform" if `scripts/package-platforms.sh` returns multiple platforms.
 
 
 
