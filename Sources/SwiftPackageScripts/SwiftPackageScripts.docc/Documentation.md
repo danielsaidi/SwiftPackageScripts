@@ -1,4 +1,4 @@
-# `SwiftPackageScripts`
+# ``SwiftPackageScripts``
 
 ## Overview
 
@@ -103,6 +103,12 @@ Swift Package Scripts is available under the MIT license. See the [LICENSE][Lice
 
 
 ## Topics
+
+### Articles
+
+- <doc:Localization-Article>
+
+### Types
 
 - ``StringCatalog``
 
