@@ -123,6 +123,6 @@ Swift Package Scripts is available under the MIT license. See the [LICENSE][Lice
 [Sponsors]: https://github.com/sponsors/danielsaidi
 [OpenSource]: https://www.danielsaidi.com/opensource
 
-[Documentation]: https://danielsaidi.github.io/swiftpackagescripts/
-[Localization]: https://danielsaidi.github.io/swiftpackagescripts/documentation/swiftpackagescripts/localization-article
+[Documentation]: https://danielsaidi.github.io/SwiftPackageScripts/
+[Localization]: https://danielsaidi.github.io/SwiftPackageScripts/documentation/swiftpackagescripts/localization-article
 [License]: https://github.com/danielsaidi/SystemNotification/blob/master/LICENSE
