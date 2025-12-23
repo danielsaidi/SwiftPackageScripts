@@ -46,6 +46,7 @@ This version adds new scripts and multiplatform DocC support.
 
 ## ✨ Features
 
+* `scripts/docc-multiplatform.sh` is a new script for building multiplatform DocC.
 * `scripts/package-platforms.sh` is a new script for getting all supported platforms.
 
 
