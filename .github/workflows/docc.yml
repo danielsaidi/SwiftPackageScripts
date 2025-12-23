@@ -8,45 +8,78 @@ name: DocC Runner
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to build'
+        required: true
+        default: 'iOS'
+        type: choice
+        options:
+          - iOS
+          - macOS
+          - tvOS
+          - watchOS
+          - xrOS
+          - Multiplatform
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
-  
+
 jobs:
   deploy:
-    runs-on: macos-latest # macos-15
-    
+    runs-on: macos-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
-        
+
       - name: Configure Pages
         uses: actions/configure-pages@v4
 
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest-stable # 16.4
+          xcode-version: latest-stable
+
+      - name: Determine Platform
+        id: platform
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "platform=${{ github.event.inputs.platform }}" >> $GITHUB_OUTPUT
+          else
+            platforms=$(bash scripts/package-platforms.sh -xros)
+            platform_count=$(echo "$platforms" | wc -l | tr -d ' ')
+            
+            if [ "$platform_count" -gt 1 ]; then
+              echo "platform=Multiplatform" >> $GITHUB_OUTPUT
+            else
+              echo "platform=$platforms" >> $GITHUB_OUTPUT
+            fi
+          fi
 
       - name: Build DocC
-        run: bash scripts/docc.sh
+        run: |
+          if [ "${{ steps.platform.outputs.platform }}" = "Multiplatform" ]; then
+            bash scripts/docc-multiplatform.sh
+          else
+            bash scripts/docc.sh --platform ${{ steps.platform.outputs.platform }}
+          fi
 
       - name: Upload DocC Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.build/docs-iOS'
+          path: ${{ steps.platform.outputs.platform == 'Multiplatform' && '.build/docc' || format('.build/docs-{0}', steps.platform.outputs.platform) }}
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4

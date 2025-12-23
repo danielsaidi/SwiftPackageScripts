@@ -49,6 +49,11 @@ This version adds new scripts and multiplatform DocC support.
 * `scripts/docc-multiplatform.sh` is a new script for building multiplatform DocC.
 * `scripts/package-platforms.sh` is a new script for getting all supported platforms.
 
+## 💡 Changes
+
+* `.github/workflows/docc.sh` now supports picking a specific platform or "multiplatform".
+* `.github/workflows/docc.sh` now defaults to "multiplatform" if `scripts/package-platforms.sh` returns multiple platforms.
+
 
 
 ## 2.0
