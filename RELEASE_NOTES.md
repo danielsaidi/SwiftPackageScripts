@@ -10,6 +10,17 @@
 Beta version tags and releases are removed after the next minor or major version. 
 
 
+
+## 2.1.1
+
+This version makes it possible to run the `xcframework` workflow for specific platforms.
+
+## ✨ Features
+
+* `.github/workflows/xcframework.yml` now defines a platform picker.
+
+
+
 ## 2.1
 
 This version adds new scripts and multiplatform DocC support.
