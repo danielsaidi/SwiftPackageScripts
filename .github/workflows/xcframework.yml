@@ -69,7 +69,7 @@ jobs:
 
       - name: Get Package Name
         run: |
-          PACKAGE_NAME=$(./scripts/package-name.sh)
+          PACKAGE_NAME=$(./scripts/package-name)
           echo "PACKAGE_NAME=$PACKAGE_NAME" >> $GITHUB_ENV
 
       - name: Install build certificate
@@ -109,13 +109,13 @@ jobs:
           fi
 
       - name: Validate git
-        run: ./scripts/release-validate-git.sh
+        run: ./scripts/release-validate-git
 
       - name: Validate project
-        run: ./scripts/release-validate-package.sh -p ${{ env.PLATFORM_ARGS }} --swiftlint 0
+        run: ./scripts/release-validate-package -p ${{ env.PLATFORM_ARGS }} --swiftlint 0
 
       - name: Run framwork script
-        run: ./scripts/xcframework.sh -p ${{ env.PLATFORM_ARGS }} --dsyms 1 --zip 1
+        run: ./scripts/xcframework -p ${{ env.PLATFORM_ARGS }} --dsyms 1 --zip 1
 
       - name: Upload XCFramework Container
         uses: actions/upload-artifact@v4
@@ -145,7 +145,7 @@ jobs:
               echo "Error: Custom version not provided"
               exit 1
             fi
-            ./scripts/version-bump.sh --version "${{ inputs.custom_version }}"
+            ./scripts/version-bump --version "${{ inputs.custom_version }}"
           else
-            ./scripts/version-bump.sh --type "${{ inputs.bump_type }}"
+            ./scripts/version-bump --type "${{ inputs.bump_type }}"
           fi

@@ -11,6 +11,16 @@ Beta version tags and releases are removed after the next minor or major version
 
 
 
+## 3.0
+
+This version removes the `.sh` extension from all `scripts/` files.
+
+This lets us run them like `./scripts/build --help` instead of `./scripts/build.sh --help`.
+
+This version also updates all GitHub workflows to run the scripts without extension. 
+
+
+
 ## 2.1.1
 
 This version makes it possible to run the `xcframework` workflow for specific platforms.

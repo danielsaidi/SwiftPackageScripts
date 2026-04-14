@@ -52,7 +52,7 @@ jobs:
           xcode-version: latest-stable
 
       - name: Build DocC
-        run: bash scripts/docc.sh --platforms ${{ github.event.inputs.platform || 'iOS' }}
+        run: bash scripts/docc --platforms ${{ github.event.inputs.platform || 'iOS' }}
 
       - name: Upload DocC Artifact
         uses: actions/upload-pages-artifact@v3

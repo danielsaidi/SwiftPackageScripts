@@ -51,7 +51,7 @@ jobs:
           xcode-version: latest-stable
 
       - name: Build DocC
-        run: bash scripts/docc-multiplatform.sh
+        run: bash scripts/docc-multiplatform
 
       - name: Upload DocC Artifact
         uses: actions/upload-pages-artifact@v3
