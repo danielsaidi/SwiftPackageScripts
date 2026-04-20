@@ -11,6 +11,14 @@ Beta version tags and releases are removed after the next minor or major version
 
 
 
+## 3.0.1
+
+## 🐛 Bug Fixes
+
+* `scripts/sync-from` used the wrong `--ghw` arg instead of `-ghw`.
+
+
+
 ## 3.0
 
 This version removes the `.sh` extension from all `scripts/` files.
