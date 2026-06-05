@@ -6,15 +6,16 @@
     <img src="https://img.shields.io/github/v/release/danielsaidi/SwiftPackageScripts?color=%2300550&sort=semver" alt="Version" title="Version" />
     <img src="https://img.shields.io/badge/swift-6.0-orange.svg" alt="Swift 6.1" title="Swift 6.0" />
     <a href="https://danielsaidi.github.io/SwiftPackageScripts"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
-    <a href="https://github.com/danielsaidi/SwiftPackageScripts/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/SwiftPackageScripts" alt="MIT License" /></a>
+    <a href="https://github.com/danielsaidi/SwiftPackageScripts/blob/main/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/SwiftPackageScripts" alt="MIT License" /></a>
 </p>
 
 
 # Swift Package Scripts
 
-Swift Package Scripts has Terminal scripts that can be used to build and test your package, build DocC and deploy it to GitHub Pages, generate XCFramework binary artifacts, create new semantic versions, etc.
+Swift Package Scripts contains scripts that can be used to build and test your package, build DocC and deploy it to GitHub Pages, generate XCFramework binary artifacts, create new semantic versions, etc.
 
-Swift Package Scripts also has a collection of GitHub Actions workflows that can run some scripts from the GitHub Actions dashboard.
+Swift Package Scripts also has GitHub Actions workflows that can run certain scripts from the Actions dashboard.
+
 
 
 ## Installation
@@ -31,7 +32,20 @@ You can then navigate to the folder and sync the scripts to any older folder, us
 ./sync-to ../AnotherPackage [--github-workflows 1]
 ```
 
-This will replace any existing scripts with the latest versions. After this, you can use `scripts/sync-from` in that project folder.
+This will replace all scripts with the latest versions. After this, you can use `scripts/sync-from` to perform a sync.
+
+
+
+## GitHub Language Detection
+
+Adding these scripts to a small package can cause GitHub to detect the repo language as `Shell`. If this happens, just add a `.gitattributes` files with the following content:
+
+```
+scripts/** linguist-vendored=true
+```
+
+This will tell GitHub to instruct the Linguist tool to igore the scripts folder when analyzing the package language.
+
 
 
 ## Scripts
@@ -59,6 +73,7 @@ The `scripts` folder contains Swift Package-related scripts, that can all be cus
 All scripts have a `--help` command, e.g. `./scripts/build --help`. Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time.
 
 
+
 ## GitHub Action Workflows
 
 The `.github` folder contains the following GitHub Actions workflows:
@@ -70,6 +85,7 @@ The `.github` folder contains the following GitHub Actions workflows:
 * `xcframework.yml` - Build an XCFramework and dSYMs for all or some platforms.
 
 Have a look at each file for workflow-specific information and if there is anything you need to do to make it work.
+
 
 
 ## String Catalog Support
@@ -85,9 +101,11 @@ Text(.l10n.myapp.onboardings.welcome.title)
 You can read more about this in the [localization][Localization] article.
 
 
+
 ## Sample Package
 
 This repository has a sample package that is used to test that everything works as expected.
+
 
 
 ## Documentation
@@ -95,9 +113,11 @@ This repository has a sample package that is used to test that everything works 
 For more information about these scripts, and how to set up project-specific scripts, see the online [here][Documentation].
 
 
+
 ## Support My Work
 
 You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
+
 
 
 ## Contact
@@ -108,6 +128,7 @@ Feel free to reach out if you have questions or if you want to contribute in any
 * Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 * Twitter: [@danielsaidi][Twitter]
 * E-mail: [daniel.saidi@gmail.com][Email]
+
 
 
 ## License
