@@ -11,9 +11,17 @@ Beta version tags and releases are removed after the next minor or major version
 
 
 
+## 3.0.2
+
+### ✨ Features
+
+* `.github/release` has a new --swiftlint parameter.
+
+
+
 ## 3.0.1
 
-## 🐛 Bug Fixes
+### 🐛 Bug Fixes
 
 * `scripts/sync-from` used the wrong `--ghw` arg instead of `-ghw`.
 
@@ -33,7 +41,7 @@ This version also updates all GitHub workflows to run the scripts without extens
 
 This version makes it possible to run the `xcframework` workflow for specific platforms.
 
-## ✨ Features
+### ✨ Features
 
 * `.github/workflows/xcframework.yml` now defines a platform picker.
 
@@ -45,12 +53,12 @@ This version adds new scripts and multiplatform DocC support.
 
 The new `docc-multiplatform` workflow is currently manual, until it's verified that it works well. After that, it should be merged with the `docc` workflow.
 
-## ✨ Features
+### ✨ Features
 
 * `scripts/docc-multiplatform.sh` is a new script for building multiplatform DocC.
 * `scripts/package-platforms.sh` is a new script for getting all supported platforms for the main Swift package.
 
-## 💡 Changes
+### 💡 Changes
 
 * `.github/workflows/docc.yml` now supports picking a specific platform or "multiplatform".
 * `.github/workflows/docc-multiplatform.yml` is a new, manual workflow for deploying multiplatform DocC documentation to GitHub pages.

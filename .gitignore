@@ -1,11 +1,8 @@
 ## User settings
 xcuserdata/
 
-## Obj-C/Swift specific
-*.hmap
-
-## App packaging
-*.ipa
+# macOS
+.DS_Store
 
 ## Playgrounds
 timeline.xctimeline
