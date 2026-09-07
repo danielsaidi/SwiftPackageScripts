@@ -116,7 +116,7 @@ BUILD_FOLDER=.build
 BUILD_FOLDER_ARTIFACTS=$BUILD_FOLDER/artifacts
 BUILD_FOLDER_ARCHIVES=$BUILD_FOLDER/framework_archives
 BUILD_FILE=$BUILD_FOLDER_ARTIFACTS/$TARGET.xcframework
-BUILD_ZIP=$BUILD_FOLDER/$TARGET.xcframework.zip
+BUILD_ZIP=$BUILD_FOLDER/$TARGET.zip
 
 # All platforms that this script can build, as "name|destination"
 # pairs, where the name doubles as the archive file name
