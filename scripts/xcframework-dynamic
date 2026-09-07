@@ -122,7 +122,7 @@ BUILD_FOLDER=.build
 BUILD_FOLDER_ARTIFACTS=$BUILD_FOLDER/artifacts
 BUILD_FOLDER_ARCHIVES=$BUILD_FOLDER/framework_archives
 BUILD_FILE=$BUILD_FOLDER_ARTIFACTS/$TARGET.xcframework
-BUILD_ZIP=$BUILD_FOLDER/$TARGET.xcframework.zip
+BUILD_ZIP=$BUILD_FOLDER/$TARGET.zip
 DSYM_FOLDER=$BUILD_FOLDER_ARCHIVES/dSYMs
 DSYM_ZIP=$BUILD_FOLDER/$TARGET-dSYMs.zip
 
@@ -221,7 +221,7 @@ for ENTRY in "${SLICES[@]}"; do
     # Build the archive for this platform. Note that using the
     # BUILD_LIBRARY_FOR_DISTRIBUTION flag builds a .swiftinterface,
     # so that the framework keeps working across compiler versions.
-    echo "Building $NAME archive..."
+    echo "Building $NAME archive from $TARGET..."
     if ! xcodebuild archive -scheme $TARGET -configuration Release -destination "$DESTINATION" -archivePath "$ARCHIVE" -derivedDataPath "$DERIVED_DATA" SKIP_INSTALL=NO BUILD_LIBRARY_FOR_DISTRIBUTION=YES DEBUG_INFORMATION_FORMAT=dwarf-with-dsym; then
         show_error_and_exit "Failed to build $NAME archive"
     fi
@@ -236,11 +236,16 @@ for ENTRY in "${SLICES[@]}"; do
         show_error_and_exit "No framework for $NAME in $ARCHIVE"
     fi
 
-    # Work on a copy, since the swiftmodule must be added to it
+    # Work on a copy, since the swiftmodule must be added to it.
+    # Copy without -L, since macOS frameworks are versioned bundles
+    # held together by symlinks (Versions/Current -> A, and the root
+    # entries pointing into it). Dereferencing those turns them into
+    # real directories, which makes the bundle malformed and fails
+    # linking with "Couldn't resolve framework symlink for .../Current".
     STAGED_FRAMEWORK="$BUILD_FOLDER_ARCHIVES/framework-$NAME/$TARGET.framework"
     mkdir -p "$(dirname "$STAGED_FRAMEWORK")"
     rm -rf "$STAGED_FRAMEWORK"
-    cp -RL "$FRAMEWORK" "$STAGED_FRAMEWORK"
+    cp -R "$FRAMEWORK" "$STAGED_FRAMEWORK"
 
     # SwiftPM leaves the .swiftmodule beside the framework instead
     # of within it, so move it in. Consumers can't import the module
@@ -251,10 +256,15 @@ for ENTRY in "${SLICES[@]}"; do
     fi
 
     # macOS frameworks are versioned and keep their modules within
-    # Versions/A/Modules, while other platforms keep them at root
+    # Versions/A/Modules, while other platforms keep them at root.
+    # A versioned bundle also needs a root Modules symlink into the
+    # current version, since that's where consumers look for it.
     if [ -d "$STAGED_FRAMEWORK/Versions/A" ]; then
         mkdir -p "$STAGED_FRAMEWORK/Versions/A/Modules"
         cp -RL "$SWIFTMODULE" "$STAGED_FRAMEWORK/Versions/A/Modules/"
+        if [ ! -e "$STAGED_FRAMEWORK/Modules" ]; then
+            ln -s "Versions/Current/Modules" "$STAGED_FRAMEWORK/Modules"
+        fi
     else
         mkdir -p "$STAGED_FRAMEWORK/Modules"
         cp -RL "$SWIFTMODULE" "$STAGED_FRAMEWORK/Modules/"
