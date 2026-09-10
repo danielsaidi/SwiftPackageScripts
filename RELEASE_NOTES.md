@@ -11,6 +11,27 @@ Beta version tags and releases are removed after the next minor or major version
 
 
 
+## 4.0
+
+This version adds two explicit XCFramework build scripts - one for static and one for dynamic.
+
+Each XCFramework script has a new GitHub actions workflow .yml file as well. Adjust if needed.
+
+This version also removes the l10n generation tools, since Xcode's string catalog can now generate l10n symbols.
+
+## ✨ Features
+
+* `.github/workflows/xcframework-dynamic.yml` is a new workflow.
+* `.github/workflows/xcframework-static.yml` is a new workflow.
+* `scripts/xcframework-dynamic` is a new script.
+* `scripts/xcframework-static` is a new script.
+
+## 💥 Breaking Changes
+
+* The l10n tools have been removed, since Xcode string catalogs can now generate symbols.
+
+
+
 ## 3.0.1
 
 ## 🐛 Bug Fixes

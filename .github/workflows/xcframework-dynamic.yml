@@ -30,7 +30,7 @@ on:
           - tvOS
           - watchOS
           - xrOS
-        default: iOS        # Change this if needed
+        default: Multiplatform
       validate_git:
         description: 'Validate git'
         required: false
