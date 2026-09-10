@@ -143,7 +143,7 @@ jobs:
               echo "Error: Custom version not provided"
               exit 1
             fi
-            ./scripts/version-bump --version "${{ inputs.custom_version }}"
+            ./scripts/version-bump --version "${{ inputs.custom_version }}" --no-semver
           else
             ./scripts/version-bump --type "${{ inputs.bump_type }}"
           fi
