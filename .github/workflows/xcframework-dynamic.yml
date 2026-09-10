@@ -1,5 +1,4 @@
 # This workflow builds binaries for a closed-source package.
-# The output is an XCFramework container(!) zip a dSYMs zip.
 
 # For this to work you must define these repository secrets:
 #   - BUILD_CERTIFICATE_BASE64
@@ -8,13 +7,14 @@
 
 # VERY IMPORTANT!
 # The XCFramework zip is a CONTAINER with the actual zip inside!
-# You must download and unzip it, then upload the nested zip to a release.
-# Uploading the container zip file will make Xcode fail to use the release.
+# You must download and unzip it, then upload the nested zip to
+# a release. Uploading the container will not work, since Xcode
+# will not be able to find a framework in the container archive.
 
 # For more information see: 
 # https://danielsaidi.com/blog/2025/11/09/building-closed-source-binaries-with-github-actions
 
-name: Create Binary Artifacts
+name: XCFramework - Dynamic
 
 on:
   workflow_dispatch:
@@ -24,13 +24,18 @@ on:
         required: false
         type: choice
         options:
-          - Multiplatform   # Uses MULTIPLATFORM_PLATFORMS below
+          - Multiplatform   # Uses MULTIPLATFORM_PLATFORMS below - change it if needed
           - iOS
           - macOS
           - tvOS
           - watchOS
           - xrOS
         default: iOS        # Change this if needed
+      validate_git:
+        description: 'Validate git'
+        required: false
+        type: boolean
+        default: true
       bump_type:
         description: 'Version bump'
         required: false
@@ -98,37 +103,39 @@ jobs:
       - name: Set up Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest-stable  # 16.4
+          xcode-version: latest-stable
 
       - name: Set Platform Arguments
         run: |
           if [ "${{ inputs.platform }}" = "Multiplatform" ]; then
             echo "PLATFORM_ARGS=${{ env.MULTIPLATFORM_PLATFORMS }}" >> $GITHUB_ENV
           else
-            echo "PLATFORM_ARGS= ${{ inputs.platform || 'iOS' }}" >> $GITHUB_ENV
+            echo "PLATFORM_ARGS=${{ inputs.platform || 'iOS' }}" >> $GITHUB_ENV
           fi
 
       - name: Validate git
+        if: ${{ inputs.validate_git }}
         run: ./scripts/release-validate-git
 
       - name: Validate project
         run: ./scripts/release-validate-package -p ${{ env.PLATFORM_ARGS }} --swiftlint 0
 
-      - name: Run framwork script
-        run: ./scripts/xcframework -p ${{ env.PLATFORM_ARGS }} --dsyms 1 --zip 1
+      - name: Run XCFramework script
+        run: ./scripts/xcframework-dynamic -p ${{ env.PLATFORM_ARGS }}
 
-      - name: Upload XCFramework Container
+      - name: Upload XCFramework
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.PACKAGE_NAME }}-Container
+          name: ${{ env.PACKAGE_NAME }}.container
           path: .build/${{ env.PACKAGE_NAME }}.zip
           if-no-files-found: error
+          compression-level: 0
 
       - name: Upload dSYMs
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.PACKAGE_NAME }}-dSYMs
-          path: .build/dSYMs
+          name: ${{ env.PACKAGE_NAME }}.dsyms
+          path: .build/${{ env.PACKAGE_NAME }}-dSYMs
           if-no-files-found: error
 
       - name: Configure Git
