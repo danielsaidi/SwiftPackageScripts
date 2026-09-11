@@ -194,9 +194,22 @@ if [ ${#SLICES[@]} -eq 0 ]; then
     show_error_and_exit "No platform matched [$PLATFORMS]. Known platforms: $(printf '%s ' "${ALL_PLATFORMS[@]%%|*}")"
 fi
 
+# Check whether the package declares resources for any target.
+# A package without resources builds no resource bundle, which
+# is expected, while one that declares them but doesn't ship
+# them builds a framework that traps as soon as a resource is
+# used. Knowing which case we're in lets us tell them apart.
+EXPECTS_RESOURCES=0
+if [ -f "Package.swift" ] && grep -q "resources:" "Package.swift"; then
+    EXPECTS_RESOURCES=1
+fi
+
 # Start script
 echo
 echo "Building $TARGET XCFramework for [$(printf '%s ' "${SLICES[@]%%|*}")]..."
+if [ "$EXPECTS_RESOURCES" == "1" ]; then
+    echo "The package declares resources, so a resource bundle is required."
+fi
 
 # Delete old builds
 echo "Cleaning old builds..."
@@ -272,6 +285,35 @@ for ENTRY in "${SLICES[@]}"; do
         cp -RL "$SWIFTMODULE" "$STAGED_FRAMEWORK/Modules/"
     fi
 
+    # SwiftPM compiles the target's resources into a separate
+    # <TARGET>_<TARGET>.bundle beside the framework, which the
+    # generated Bundle.module accessor looks for within the
+    # framework. It traps with "unable to find bundle named ..."
+    # when it's missing, so a framework without it builds fine
+    # but crashes as soon as a resource is used.
+    # Packages without resources build no bundle at all, so a
+    # missing one is only an error when the package declares
+    # resources for the target.
+    RESOURCE_BUNDLE="$PRODUCTS/${TARGET}_${TARGET}.bundle"
+    if [ -d "$RESOURCE_BUNDLE" ]; then
+
+        # macOS frameworks are versioned and keep their resources
+        # within Versions/A/Resources, which the root Resources
+        # symlink points into, while other platforms keep them at
+        # the framework root.
+        if [ -d "$STAGED_FRAMEWORK/Versions/A" ]; then
+            mkdir -p "$STAGED_FRAMEWORK/Versions/A/Resources"
+            cp -RL "$RESOURCE_BUNDLE" "$STAGED_FRAMEWORK/Versions/A/Resources/"
+            if [ ! -e "$STAGED_FRAMEWORK/Resources" ]; then
+                ln -s "Versions/Current/Resources" "$STAGED_FRAMEWORK/Resources"
+            fi
+        else
+            cp -RL "$RESOURCE_BUNDLE" "$STAGED_FRAMEWORK/"
+        fi
+    elif [ "$EXPECTS_RESOURCES" == "1" ]; then
+        show_error_and_exit "No resource bundle for $NAME at $RESOURCE_BUNDLE"
+    fi
+
     XCFRAMEWORK_ARGS+=(-framework "$STAGED_FRAMEWORK")
 
     # Ship debug symbols alongside the framework, so that crash
@@ -292,6 +334,19 @@ echo "Generating XCFramework..."
 mkdir -p "$(dirname $BUILD_FILE)"
 if ! xcodebuild -create-xcframework "${XCFRAMEWORK_ARGS[@]}" -output $BUILD_FILE; then
     show_error_and_exit "Failed to generate XCFramework"
+fi
+
+# Verify that every slice kept its resource bundle, since a
+# missing one only surfaces as a crash at runtime. The dSYMs
+# are skipped, since they carry a copy of the bundle as well.
+if [ "$EXPECTS_RESOURCES" == "1" ]; then
+    echo "Verifying resource bundles..."
+    for SLICE in "$BUILD_FILE"/*/; do
+        [ -d "$SLICE" ] || continue
+        if ! find "$SLICE" -name "${TARGET}_${TARGET}.bundle" -type d -not -path "*.dSYM/*" | grep -q .; then
+            show_error_and_exit "No resource bundle in slice $(basename "$SLICE")"
+        fi
+    done
 fi
 
 # Generate XCFramework zip and checksum, unless --no-zip was passed

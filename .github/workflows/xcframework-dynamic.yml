@@ -24,13 +24,13 @@ on:
         required: false
         type: choice
         options:
-          - Multiplatform   # Uses MULTIPLATFORM_PLATFORMS below - change it if needed
+          - Multiplatform       # Change MULTIPLATFORM_PLATFORMS if needed
           - iOS
           - macOS
           - tvOS
           - watchOS
           - xrOS
-        default: Multiplatform
+        default: Multiplatform  # Change this if needed
       validate_git:
         description: 'Validate git'
         required: false
