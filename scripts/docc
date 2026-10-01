@@ -12,10 +12,11 @@ show_usage() {
     echo "This script builds DocC for a <TARGET> and certain <PLATFORMS>."
 
     echo
-    echo "Usage: $0 [TARGET] [-p|--platforms <PLATFORM1> <PLATFORM2> ...] [--hosting-base-path <PATH>]"
+    echo "Usage: $0 [TARGET] [-p|--platforms <PLATFORM1> <PLATFORM2> ...] [--hosting-base-path <PATH>] [--include-synthesized-members]"
     echo "  [TARGET]              Optional. The target to build documentation for (defaults to package name)"
     echo "  -p, --platforms       Optional. List of platforms (default: iOS macOS tvOS watchOS xrOS)"
     echo "  --hosting-base-path   Optional. Base path for static hosting (default: TARGET name, use empty string \"\" for root)"
+    echo "  --include-synthesized-members  Optional. Include inherited protocol members, e.g. all SwiftUI View modifiers (default: skipped)"
 
     echo
     echo "The web transformed documentation ends up in .build/docs-<PLATFORM>."
@@ -29,6 +30,7 @@ show_usage() {
     echo "  $0 MyTarget --platforms iOS macOS tvOS watchOS xrOS"
     echo "  $0 MyTarget --hosting-base-path \"\""
     echo "  $0 MyTarget --hosting-base-path \"custom/path\""
+    echo "  $0 MyTarget --include-synthesized-members"
     echo
 }
 
@@ -46,6 +48,7 @@ TARGET=""
 PLATFORMS="iOS macOS tvOS watchOS xrOS"  # Default platforms
 HOSTING_BASE_PATH=""  # Will be set to TARGET if not specified
 HOSTING_BASE_PATH_SET=false  # Tracks if a path was explicitly provided
+SKIP_SYNTHESIZED_MEMBERS=YES  # Skip inherited protocol members, which can bloat the docs
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -73,6 +76,10 @@ while [[ $# -gt 0 ]]; do
             fi
             HOSTING_BASE_PATH="$1"
             HOSTING_BASE_PATH_SET=true
+            shift
+            ;;
+        --include-synthesized-members)
+            SKIP_SYNTHESIZED_MEMBERS=NO
             shift
             ;;
         -h|--help)
@@ -146,7 +153,7 @@ build_platform() {
 
     # Build $TARGET docs for the $PLATFORM
     echo "Building $TARGET docs for $PLATFORM..."
-    if ! xcodebuild docbuild -scheme $TARGET -derivedDataPath .build/docbuild -destination "generic/platform=$PLATFORM"; then
+    if ! xcodebuild docbuild -scheme $TARGET -derivedDataPath .build/docbuild -destination "generic/platform=$PLATFORM" DOCC_SKIP_SYNTHESIZED_MEMBERS=$SKIP_SYNTHESIZED_MEMBERS; then
         echo "Failed to build documentation for $PLATFORM"
         return 1
     fi

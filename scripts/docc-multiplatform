@@ -13,10 +13,11 @@ show_usage() {
     echo "Unlike the 'docc' script, this scripts combines DocC for all platform into a single output."
 
     echo
-    echo "Usage: $0 [TARGET] [-p|--platforms <PLATFORM1> <PLATFORM2> ...] [--hosting-base-path <PATH>]"
+    echo "Usage: $0 [TARGET] [-p|--platforms <PLATFORM1> <PLATFORM2> ...] [--hosting-base-path <PATH>] [--include-synthesized-members]"
     echo "  [TARGET]              Optional. The target to build documentation for (defaults to package name)"
     echo "  -p, --platforms       Optional. List of platforms (default: iOS macOS tvOS watchOS xrOS)"
     echo "  --hosting-base-path   Optional. Base path for static hosting (default: TARGET name, use empty string \"\" for root)"
+    echo "  --include-synthesized-members  Optional. Include inherited protocol members, e.g. all SwiftUI View modifiers (default: skipped)"
 
     echo
     echo "The web transformed documentation ends up in .build/docc."
@@ -30,6 +31,7 @@ show_usage() {
     echo "  $0 MyTarget --platforms iOS macOS tvOS watchOS xrOS"
     echo "  $0 MyTarget --hosting-base-path \"\""
     echo "  $0 MyTarget --hosting-base-path \"custom/path\""
+    echo "  $0 MyTarget --include-synthesized-members"
     echo
 }
 
@@ -47,6 +49,7 @@ TARGET=""
 PLATFORMS="iOS macOS tvOS watchOS xrOS"  # Default platforms
 HOSTING_BASE_PATH=""  # Will be set to TARGET if not specified
 HOSTING_BASE_PATH_SET=false  # Tracks if a path was explicitly provided
+SKIP_SYNTHESIZED_MEMBERS=YES  # Skip inherited protocol members, which can bloat the docs
 
 # Define paths
 SYMBOL_GRAPHS_DIR=".build/symbol-graphs"
@@ -78,6 +81,10 @@ while [[ $# -gt 0 ]]; do
             fi
             HOSTING_BASE_PATH="$1"
             HOSTING_BASE_PATH_SET=true
+            shift
+            ;;
+        --include-synthesized-members)
+            SKIP_SYNTHESIZED_MEMBERS=NO
             shift
             ;;
         -h|--help)
@@ -149,13 +156,19 @@ build_platform() {
             ;;
     esac
 
+    # Define the symbol graph flags, optionally skipping synthesized members
+    local SYMBOL_GRAPH_FLAGS="-emit-symbol-graph -emit-symbol-graph-dir $SYMBOL_GRAPHS_DIR/$PLATFORM"
+    if [ "$SKIP_SYNTHESIZED_MEMBERS" = YES ]; then
+        SYMBOL_GRAPH_FLAGS="$SYMBOL_GRAPH_FLAGS -symbol-graph-skip-synthesized-members"
+    fi
+
     # Build $TARGET docs for the $PLATFORM
     echo "Building $TARGET docs for $PLATFORM..."
     if ! xcodebuild  \
         -scheme $TARGET \
         -derivedDataPath .build/.deriveddata \
         -destination "generic/platform=$PLATFORM" \
-        OTHER_SWIFT_FLAGS="-emit-symbol-graph -emit-symbol-graph-dir $SYMBOL_GRAPHS_DIR/$PLATFORM"; then
+        OTHER_SWIFT_FLAGS="$SYMBOL_GRAPH_FLAGS"; then
         echo "Failed to build documentation for $PLATFORM"
         return 1
     fi

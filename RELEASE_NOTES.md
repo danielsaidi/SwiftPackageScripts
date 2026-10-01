@@ -25,6 +25,8 @@ Each XCFramework script has a new GitHub actions workflow .yml file as well. Adj
 ## 💡 Changes
 
 * The `docc` and `docc-multiplatform` scripts now honors an empty hosting base path.
+* The `docc` and `docc-multiplatform` scripts now skip synthesized members, like inherited SwiftUI view modifiers.
+* The `docc` and `docc-multiplatform` scripts have a new `--include-synthesized-members` parameter to include them.
 * The `framework` and `bump_version` workflows disable semver check for custom versions.
 
 
