@@ -52,10 +52,10 @@ This will tell GitHub to instruct the Linguist tool to igore the scripts folder 
 
 The `scripts` folder contains Swift Package-related scripts, that can all be customized with their own parameters:
 
-* `build` - Build a target for all or some platforms.
+* `build` - Build a target for any platforms.
 * `chmod-all` - Runs `chmod +x` on all scripts in the script folder.
-* `docc` - Build DocC documentation for all or some platforms.
-* `docc-multiplatform` - Build multi-platform DocC documentation for all or some platforms.
+* `docc` - Build DocC documentation.
+* `docc-multiplatform` - Build multi-platform DocC documentation.
 * `git-default-branch` - Get the default git branch name.
 * `l10n-gen` - Generate public translation key wrappers from an Xcode 26 string catalog.
 * `package-name` - Get the name of the main Swift package.
@@ -65,10 +65,11 @@ The `scripts` folder contains Swift Package-related scripts, that can all be cus
 * `release-validate-package` - Validate the package for release.
 * `sync-from` - Sync `scripts` and `.github/workflows` from a Swift Package Scripts folder.
 * `sync-to` - Sync `scripts` and `.github/workflows` to another package folder.
-* `test` - Test a target on all or some platforms.
+* `test` - Test a target for any platforms.
 * `version-bump` - Bump the current version number and create a new tag.
 * `version-number` - Get the current version number from the latest tag.
-* `xcframework` - Build an XCFramework for all or some platforms.
+* `xcframework-dynamic` - Build a dynamic XCFramework for any platforms.
+* `xcframework-static` - Build a static XCFramework for any platforms.
 
 All scripts have a `--help` command, e.g. `./scripts/build --help`. Note that you have to run `chmod +x <SCRIPT>` to be able to run a script for the first time.
 
@@ -78,11 +79,13 @@ All scripts have a `--help` command, e.g. `./scripts/build --help`. Note that yo
 
 The `.github` folder contains the following GitHub Actions workflows:
 
-* `build.yml` - Build the package for all or some platforms.
+* `build.yml` - Build the package for any platforms.
 * `docc.yml` - Build DocC documentation and deploy it to GitHub Pages.
-* `test.yml` - Test the package on all or some platforms.
-* `version_bump.yml` - Bump the current version number and create a new tag.
-* `xcframework.yml` - Build an XCFramework and dSYMs for all or some platforms.
+* `docc-multiplatform.yml` - Build multi-platform DocC documentation.
+* `test.yml` - Test the package for any platforms.
+* `version-bump.yml` - Bump the current version number and create a new tag.
+* `xcframework-dynamic` - Build a dynamic XCFramework for any platforms.
+* `xcframework-static` - Build a static XCFramework for any platforms.
 
 Have a look at each file for workflow-specific information and if there is anything you need to do to make it work.
 
