@@ -84,8 +84,8 @@ The `.github` folder contains the following GitHub Actions workflows:
 * `docc-multiplatform.yml` - Build multi-platform DocC documentation.
 * `test.yml` - Test the package for any platforms.
 * `version-bump.yml` - Bump the current version number and create a new tag.
-* `xcframework-dynamic` - Build a dynamic XCFramework for any platforms.
-* `xcframework-static` - Build a static XCFramework for any platforms.
+* `xcframework-dynamic.yml` - Build a dynamic XCFramework for any platforms.
+* `xcframework-static.yml` - Build a static XCFramework for any platforms.
 
 Have a look at each file for workflow-specific information and if there is anything you need to do to make it work.
 

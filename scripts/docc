@@ -45,6 +45,7 @@ show_error_and_exit() {
 TARGET=""
 PLATFORMS="iOS macOS tvOS watchOS xrOS"  # Default platforms
 HOSTING_BASE_PATH=""  # Will be set to TARGET if not specified
+HOSTING_BASE_PATH_SET=false  # Tracks if a path was explicitly provided
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -71,6 +72,7 @@ while [[ $# -gt 0 ]]; do
                 show_error_and_exit "--hosting-base-path requires a value (use \"\" for empty path)"
             fi
             HOSTING_BASE_PATH="$1"
+            HOSTING_BASE_PATH_SET=true
             shift
             ;;
         -h|--help)
@@ -103,7 +105,7 @@ if [ -z "$TARGET" ]; then
 fi
 
 # Set default hosting base path if not specified
-if [ -z "$HOSTING_BASE_PATH" ]; then
+if [ "$HOSTING_BASE_PATH_SET" = false ]; then
     HOSTING_BASE_PATH="$TARGET"
 fi
 

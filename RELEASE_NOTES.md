@@ -17,22 +17,15 @@ This version adds two explicit XCFramework build scripts - one for static and on
 
 Each XCFramework script has a new GitHub actions workflow .yml file as well. Adjust if needed.
 
-This version also removes the l10n generation tools, since Xcode's string catalog can now generate l10n symbols.
-
 ## ✨ Features
 
-* `.github/workflows/xcframework-dynamic.yml` is a new workflow.
-* `.github/workflows/xcframework-static.yml` is a new workflow.
-* `scripts/xcframework-dynamic` is a new script.
-* `scripts/xcframework-static` is a new script.
+* `xcframework-dynamic` and `xcframework-static` are new scripts.
+* `xcframework-dynamic.yml` and `xcframework-static.yml` are new workflows.
 
 ## 💡 Changes
 
-* The framework and version bump workflows now disable semver check for custom versions.
-
-## 💥 Breaking Changes
-
-* The l10n tools have been removed, since Xcode string catalogs can now generate symbols.
+* The `docc` and `docc-multiplatform` scripts now honors an empty hosting base path.
+* The `framework` and `bump_version` workflows disable semver check for custom versions.
 
 
 

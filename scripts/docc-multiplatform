@@ -46,6 +46,7 @@ show_error_and_exit() {
 TARGET=""
 PLATFORMS="iOS macOS tvOS watchOS xrOS"  # Default platforms
 HOSTING_BASE_PATH=""  # Will be set to TARGET if not specified
+HOSTING_BASE_PATH_SET=false  # Tracks if a path was explicitly provided
 
 # Define paths
 SYMBOL_GRAPHS_DIR=".build/symbol-graphs"
@@ -76,6 +77,7 @@ while [[ $# -gt 0 ]]; do
                 show_error_and_exit "--hosting-base-path requires a value (use \"\" for empty path)"
             fi
             HOSTING_BASE_PATH="$1"
+            HOSTING_BASE_PATH_SET=true
             shift
             ;;
         -h|--help)
@@ -108,7 +110,7 @@ if [ -z "$TARGET" ]; then
 fi
 
 # Set default hosting base path if not specified
-if [ -z "$HOSTING_BASE_PATH" ]; then
+if [ "$HOSTING_BASE_PATH_SET" = false ]; then
     HOSTING_BASE_PATH="$TARGET"
 fi
 
@@ -175,6 +177,12 @@ for PLATFORM in $PLATFORMS; do
     fi
 done
 
+# Add hosting-base-path only if it's not empty
+HOSTING_BASE_PATH_ARGS=()
+if [ -n "$HOSTING_BASE_PATH" ]; then
+    HOSTING_BASE_PATH_ARGS=(--hosting-base-path "$HOSTING_BASE_PATH")
+fi
+
 # Create a .doccarchive from the symbols.
 $(xcrun --find docc) convert "Sources/$TARGET/$TARGET.docc" \
     --emit-lmdb-index \
@@ -183,7 +191,7 @@ $(xcrun --find docc) convert "Sources/$TARGET/$TARGET.docc" \
     --fallback-bundle-version 0 \
     --output-dir "$DOCC_OUTPUT_DIR" \
     --additional-symbol-graph-dir "$SYMBOL_GRAPHS_DIR" \
-    --hosting-base-path "$HOSTING_BASE_PATH"
+    "${HOSTING_BASE_PATH_ARGS[@]}"
 
 # Inject a root redirect script on the root page
 echo "<script>window.location.href += \"/documentation/$TARGET_LOWERCASED\"</script>" > $DOCC_OUTPUT_DIR/index.html;
